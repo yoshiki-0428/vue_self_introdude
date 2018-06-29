@@ -1,6 +1,6 @@
-# y
+# Self Introducing Site!!
 
-> y
+> I publish my engineer story and skill set on the this site.
 
 ## Build Setup
 
