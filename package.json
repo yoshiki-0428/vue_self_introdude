@@ -11,7 +11,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "onsenui": "^2.10.1",
     "vue": "^2.5.2",
+    "vue-onsenui": "^2.6.1",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
