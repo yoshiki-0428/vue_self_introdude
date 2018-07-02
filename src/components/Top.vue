@@ -1,10 +1,5 @@
 <template>
   <div class="top">
-    <v-ons-toolbar>
-      <div class="center">
-        Top Header
-      </div>
-    </v-ons-toolbar>
     <h1>Welcome to My self introducing site!! I'm yoshiki</h1>
     <h2>I am Web Engineer in Japan. My main language is Java because I spent a devlopment time at 2 years...</h2>
     <h2>Essential My Social Links</h2>
@@ -31,6 +26,13 @@
           target="_blank"
         >
           Facebook
+        </a>
+      </li>
+      <li>
+        <a
+          href="#/story"
+          target="_self">
+          Story
         </a>
       </li>
     </ul>
