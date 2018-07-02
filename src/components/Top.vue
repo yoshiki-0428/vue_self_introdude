@@ -35,6 +35,13 @@
           Story
         </a>
       </li>
+      <li>
+        <a
+          href="#/my_room"
+          target="_self">
+          MyRoom
+        </a>
+      </li>
     </ul>
   </div>
 </template>
