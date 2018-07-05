@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Top from '@/components/Top'
 import Story from '@/components/Story'
-import MyRoom from '@/components/MyRoom'
+import Post from '@/components/Post'
 
 Vue.use(Router)
 
@@ -19,9 +19,9 @@ export default new Router({
       component: Story
     },
     {
-      path: '/my_room',
-      name: 'my_room',
-      component: MyRoom
+      path: '/post',
+      name: 'post',
+      component: Post
     }
   ]
 })

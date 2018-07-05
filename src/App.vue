@@ -1,21 +1,12 @@
 <template>
   <div id="app">
-    <!-- とりあえず画像を配置 -->
-    <md-card>
-      <md-card-media-cover>
-        <md-card-media md-ratio="16:9">
-          <img :src="url" alt="Skyscraper">
-        </md-card-media>
+    <md-tabs md-alignment="centered">
+      <md-tab id="tab-home" md-icon="home" md-label="top" to="/top"></md-tab>
+      <md-tab id="tab-pages" md-icon="play_arrow" md-label="story" to="/story"></md-tab>
+      <md-tab id="tab-posts" md-icon="pages" md-label="Posts" to="/post"></md-tab>
+      <md-tab id="tab-favorites" md-icon="contacts" md-label="Contact"></md-tab>
+    </md-tabs>
 
-        <md-card-area>
-          <md-card-header>
-            <span class="md-title">Welcome my page !!</span>
-            <!-- ゆっくりしていってね！ -->
-            <span class="md-subhead">Make yourself at home.</span>
-          </md-card-header>
-        </md-card-area>
-      </md-card-media-cover>
-    </md-card>
     <router-view/>
   </div>
 </template>
@@ -38,7 +29,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 .md-card {
