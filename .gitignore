@@ -13,10 +13,7 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-dist/*.gz
-dist/*.map
-dist/vue.common.min.js
-dist/*.js
+/dist/
 
 # Runtime data
 pids
