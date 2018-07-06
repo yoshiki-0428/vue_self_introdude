@@ -30,11 +30,4 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
-.md-card {
-    width: 320px;
-    margin: 4px;
-    display: inline-block;
-    vertical-align: top;
-  }
 </style>

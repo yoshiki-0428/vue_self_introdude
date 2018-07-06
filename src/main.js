@@ -3,9 +3,16 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+
+// デザイン
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/black-green-light.css'
+
+// firebase
+import firebase from 'firebase'
+import {firebaseConfig} from '../firebase-config'
+export const firebaseDatabase = firebase.initializeApp(firebaseConfig).database()
 
 Vue.use(VueMaterial)
 Vue.config.productionTip = false
