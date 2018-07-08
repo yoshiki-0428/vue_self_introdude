@@ -29,13 +29,13 @@ export default {
   name: 'Story',
   created() {
     const story = firebase.database().ref('story')
+    console.log(story)
   },
   data () {
     return {}
   }
 }
 </script>
-
 
 <style scoped>
 .md-card {

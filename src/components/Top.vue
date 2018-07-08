@@ -1,30 +1,36 @@
 <template>
   <div class="top">
     <md-card>
-      <md-card-media-cover>
-        <md-card-media md-ratio="16:9">
-          <img :src="url" alt="Skyscraper">
-        </md-card-media>
+      <md-card-media md-ratio="16:9">
+        <img :src="url" alt="Skyscraper">
+      </md-card-media>
 
-        <md-card-area>
-          <md-card-header>
-            <span class="md-title">Welcome my page !!</span>
-            <!-- ゆっくりしていってね！ -->
-            <span class="md-subhead">Make yourself at home.</span>
-          </md-card-header>
-        </md-card-area>
-      </md-card-media-cover>
+      <md-card-area>
+        <md-card-header>
+          <span class="md-title">Welcome my page !!</span><br />
+          <!-- ゆっくりしていってね！ -->
+          <span class="md-subhead">Make yourself at home.</span>
+        </md-card-header>
+
+        <md-card-content>
+          <p class="md-title">
+            Welcome to My self introducing site!! I'm yoshiki.
+          </p>
+          <span class="md-subhead">
+            I am Web Engineer in Japan. My main language is Java because I spent a devlopment time at 2 years.
+          </span>
+        </md-card-content>
+      </md-card-area>
     </md-card>
 
-    <h1>Welcome to My self introducing site!! I'm yoshiki</h1>
-    <h2>I am Web Engineer in Japan. My main language is Java because I spent a devlopment time at 2 years...</h2>
-    <h2>Essential My Social Links</h2>
+    <h2>My Social Links</h2>
     <ul>
       <li>
         <a
           href="https://twitter.com/yoshiki_pg0428"
           target="_blank"
         >
+          <md-icon>public</md-icon>
           Twitter
         </a>
       </li>
@@ -33,6 +39,7 @@
           href="https://www.instagram.com/yoshiki_04_28/"
           target="_blank"
         >
+          <md-icon>camera_alt</md-icon>
           Instagram
         </a>
       </li>
@@ -41,6 +48,7 @@
           href="https://www.facebook.com/profile.php?id=100005275263520"
           target="_blank"
         >
+          <md-icon>face</md-icon>
           Facebook
         </a>
       </li>
@@ -66,6 +74,10 @@ export default {
     margin: 4px;
     display: inline-block;
     vertical-align: top;
+}
+
+.top {
+  margin-bottom: 5%;
 }
 
 h1, h2 {
