@@ -12,9 +12,10 @@ import 'vue-material/dist/theme/black-green-light.css'
 // firebase
 import firebase from 'firebase'
 import {firebaseConfig} from '../firebase-config'
-export const firebaseDatabase = firebase.initializeApp(firebaseConfig).database()
+firebase.initializeApp(firebaseConfig).database()
 
 Vue.use(VueMaterial)
+Vue.use(firebase)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

@@ -1,19 +1,20 @@
 <template>
   <div class="story">
     <h1>My story</h1>
-    <md-table md-card>
-      <md-table-row>
-        <md-table-head>期間</md-table-head>
-        <md-table-head>開発名称</md-table-head>
-        <md-table-head>言語</md-table-head>
-        <md-table-head>プラットフォーム／ツール</md-table-head>
-      </md-table-row>
-
-      <md-table-row>
-        <md-table-cell>2016-04 ~ 2017-08</md-table-cell>
-        <md-table-cell>Java開発</md-table-cell>
-        <md-table-cell>Kotlin, Java, Node.js, Vue.js</md-table-cell>
-        <md-table-cell>Watson API, SlackAPI, MySql, Doma2, AWS</md-table-cell>
+    <md-table v-model="stories" md-card>
+      <md-table-row slot="md-table-row" slot-scope="{ item }">
+        <md-table-cell md-label="期間" md-sort-by="start_period">
+          {{ item.start_period }} ~ {{ item.end_period }}
+        </md-table-cell>
+        <md-table-cell md-label="開発名称" md-sort-by="product_name">
+          {{ item.product_name }}
+        </md-table-cell>
+        <md-table-cell md-label="言語" md-sort-by="language">
+          {{ item.language }}
+        </md-table-cell>
+        <md-table-cell md-label="ツールなど" md-sort-by="tools">
+          {{ item.tools }}
+        </md-table-cell>
       </md-table-row>
     </md-table>
     <br />
@@ -22,17 +23,32 @@
 </template>
 
 <script>
-import firebaseDatabase from '../main.js'
 import firebase from 'firebase'
 
 export default {
   name: 'Story',
-  created() {
-    const story = firebase.database().ref('story')
-    console.log(story)
-  },
   data () {
-    return {}
+    return {
+      stories: this.getStories()
+    }
+  },
+  methods: {
+    getStories: function () {
+      var stories = []
+      firebase.database().ref('story').on('value', snapshot => {
+        snapshot.val().forEach(storyRef => stories.push(this.toStory(storyRef)))
+      })
+      return stories
+    },
+    toStory: function (storyRef) {
+      return {
+        start_period: storyRef.start_period,
+        end_period: storyRef.end_period,
+        language: storyRef.language,
+        product_name: storyRef.product_name,
+        tools: storyRef.tools
+      }
+    }
   }
 }
 </script>
