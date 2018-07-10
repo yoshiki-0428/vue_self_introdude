@@ -10,15 +10,19 @@
           {{ item.product_name }}
         </md-table-cell>
         <md-table-cell md-label="言語" md-sort-by="language">
-          {{ item.language }}
+          <!-- TODO 言語の量に応じて分タグ付け -->
+          <md-chip>
+            {{ item.language }}
+          </md-chip>
         </md-table-cell>
         <md-table-cell md-label="ツールなど" md-sort-by="tools">
-          {{ item.tools }}
+          <!-- TODO ツールの量に応じて分タグ付け -->
+          <md-chip>
+            {{ item.tools }}
+          </md-chip>
         </md-table-cell>
       </md-table-row>
     </md-table>
-    <br />
-    <md-button>add</md-button>
   </div>
 </template>
 
