@@ -30,12 +30,12 @@
 
       <md-field>
         <label>CSV File</label>
-        <md-file accept="text/csv" v-model="csvFile" />
+        <md-file accept="text/csv" @md-change="fileListEvent"/>
       </md-field>
 
       <md-dialog-actions>
         <md-button class="md-primary" @click="showDialog = false">Close</md-button>
-        <md-button class="md-primary" @click="showDialog = false">Save</md-button>
+        <md-button class="md-primary" @click="csvUpload()">Save</md-button>
       </md-dialog-actions>
     </md-dialog>
 
@@ -72,6 +72,14 @@ export default {
         product_name: storyRef.product_name,
         tools: storyRef.tools
       }
+    },
+    csvUpload: function () {
+      console.log(typeof(this.csvFile))
+      console.log(this.csvFile)
+      const file = this.csvFile;
+    },
+		fileListEvent(fileList) {
+			this.csvFile = fileList[0]
     }
   }
 }
