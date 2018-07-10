@@ -23,6 +23,24 @@
         </md-table-cell>
       </md-table-row>
     </md-table>
+    <br />
+
+    <md-dialog :md-active.sync="showDialog">
+      <md-dialog-title>upload my stories</md-dialog-title>
+
+      <md-field>
+        <label>CSV File</label>
+        <md-file accept="text/csv" v-model="csvFile" />
+      </md-field>
+
+      <md-dialog-actions>
+        <md-button class="md-primary" @click="showDialog = false">Close</md-button>
+        <md-button class="md-primary" @click="showDialog = false">Save</md-button>
+      </md-dialog-actions>
+    </md-dialog>
+
+    <md-button class="md-primary md-raised" @click="showDialog = true">Upload Dialog</md-button>
+
   </div>
 </template>
 
@@ -33,7 +51,9 @@ export default {
   name: 'Story',
   data () {
     return {
-      stories: this.getStories()
+      stories: this.getStories(),
+      showDialog: false,
+      csvFile: null
     }
   },
   methods: {
