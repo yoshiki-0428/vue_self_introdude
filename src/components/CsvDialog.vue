@@ -32,7 +32,7 @@ export default {
     }
   },
   methods: {
-    csvUpload() {
+    csvUpload () {
       // TODO keyは1つでも良い
       // TODO csv分更新しているクソコード -> まとめて更新
       // TODO 現状なんでもpushしてしまう -> validation
@@ -51,8 +51,8 @@ export default {
         firebase.database().ref().update(updates)
       })
     },
-		fileChangeEvent(fileList) {
-      const reader = new FileReader
+    fileChangeEvent (fileList) {
+      const reader = new FileReader()
       if (fileList[0]) {
         const file = fileList[0]
         reader.readAsText(file)
