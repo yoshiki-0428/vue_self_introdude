@@ -11,6 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "csv-parser": "^1.12.1",
     "firebase": "^5.2.0",
     "material-design-icons": "^3.0.1",
     "vue": "^2.5.2",

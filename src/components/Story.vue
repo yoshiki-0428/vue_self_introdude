@@ -23,29 +23,15 @@
         </md-table-cell>
       </md-table-row>
     </md-table>
-    <br />
 
-    <md-dialog :md-active.sync="showDialog">
-      <md-dialog-title>upload my stories</md-dialog-title>
-
-      <md-field>
-        <label>CSV File</label>
-        <md-file accept="text/csv" @md-change="fileListEvent"/>
-      </md-field>
-
-      <md-dialog-actions>
-        <md-button class="md-primary" @click="showDialog = false">Close</md-button>
-        <md-button class="md-primary" @click="csvUpload()">Save</md-button>
-      </md-dialog-actions>
-    </md-dialog>
-
-    <md-button class="md-primary md-raised" @click="showDialog = true">Upload Dialog</md-button>
+    <csv-dialog/>
 
   </div>
 </template>
 
 <script>
 import firebase from 'firebase'
+import CsvDialog from './CsvDialog'
 
 export default {
   name: 'Story',
@@ -55,6 +41,9 @@ export default {
       showDialog: false,
       csvFile: null
     }
+  },
+  components: {
+    'csv-dialog': CsvDialog
   },
   methods: {
     getStories: function () {
@@ -72,14 +61,6 @@ export default {
         product_name: storyRef.product_name,
         tools: storyRef.tools
       }
-    },
-    csvUpload: function () {
-      console.log(typeof(this.csvFile))
-      console.log(this.csvFile)
-      const file = this.csvFile;
-    },
-		fileListEvent(fileList) {
-			this.csvFile = fileList[0]
     }
   }
 }
