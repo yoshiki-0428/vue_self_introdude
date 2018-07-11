@@ -33,7 +33,23 @@ export default {
   },
   methods: {
     csvUpload() {
-      stream.on('data', data => console.log(data))
+      // TODO keyは1つでも良い
+      // TODO csv分更新しているクソコード -> まとめて更新
+      // TODO 現状なんでもpushしてしまう -> validation
+      stream.on('data', data => {
+        var updates = {}
+        var newPostKey = firebase.database().ref('story').push().key
+        console.log(data)
+        console.log(newPostKey)
+        updates['/story/' + newPostKey + '/'] = {
+          start_period: data.period.split('~')[0],
+          end_period: data.period.split('~')[1],
+          language: data.language,
+          product_name: data.product_name,
+          tools: data.tools
+        }
+        firebase.database().ref().update(updates)
+      })
     },
 		fileChangeEvent(fileList) {
       const reader = new FileReader

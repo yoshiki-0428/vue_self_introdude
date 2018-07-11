@@ -49,7 +49,9 @@ export default {
     getStories: function () {
       var stories = []
       firebase.database().ref('story').on('value', snapshot => {
-        snapshot.val().forEach(storyRef => stories.push(this.toStory(storyRef)))
+        if (snapshot) {
+          Object.values(snapshot.val()).forEach(storyRef => stories.push(this.toStory(storyRef)))
+        }
       })
       return stories
     },
