@@ -1,6 +1,17 @@
 # Self Introducing Site!!
 
-> I publish my engineer story and skill set on the site.
+- I publish my engineer story (career) and skill set on the site.
+
+[site url](https://selfintroduce-dfbf9.firebaseapp.com/#/top)
+
+## Firebase deploy
+``` bash
+# initialize firebase
+firebase init
+
+# deploy to firebase
+firebase deploy
+```
 
 ## Build Setup
 
