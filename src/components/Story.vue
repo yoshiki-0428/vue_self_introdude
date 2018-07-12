@@ -10,16 +10,10 @@
           {{ item.product_name }}
         </md-table-cell>
         <md-table-cell md-label="言語" md-sort-by="language">
-          <!-- TODO 言語の量に応じて分タグ付け -->
-          <md-chip>
-            {{ item.language }}
-          </md-chip>
+          <multi-tag :tags="item.language" />
         </md-table-cell>
         <md-table-cell md-label="ツールなど" md-sort-by="tools">
-          <!-- TODO ツールの量に応じて分タグ付け -->
-          <md-chip>
-            {{ item.tools }}
-          </md-chip>
+          <multi-tag :tags="item.tools" />
         </md-table-cell>
       </md-table-row>
     </md-table>
@@ -32,6 +26,7 @@
 <script>
 import firebase from 'firebase'
 import CsvDialog from './CsvDialog'
+import MultiTag from './MultiTag'
 
 export default {
   name: 'Story',
@@ -39,11 +34,11 @@ export default {
     return {
       stories: this.getStories(),
       showDialog: false,
-      csvFile: null
     }
   },
   components: {
-    'csv-dialog': CsvDialog
+    'csv-dialog': CsvDialog,
+    'multi-tag': MultiTag
   },
   methods: {
     getStories: function () {
