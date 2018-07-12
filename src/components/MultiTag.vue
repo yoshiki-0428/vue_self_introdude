@@ -23,7 +23,8 @@ export default {
 <style scoped>
   .md-chip {
     margin-left: 1%;
-    margin-bottom: 2%;
+    margin-top: 1%;
+    margin-bottom: 1%;
   }
 
   small {
