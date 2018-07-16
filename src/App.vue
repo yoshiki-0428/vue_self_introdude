@@ -23,6 +23,13 @@ export default {
 </script>
 
 <style>
+.top_picture {
+    width: 320px;
+    margin: 4px;
+    display: inline-block;
+    vertical-align: top;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

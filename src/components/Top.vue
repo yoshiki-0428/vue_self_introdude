@@ -1,6 +1,6 @@
 <template>
   <div class="top">
-    <md-card>
+    <md-card class="top_picture">
       <md-card-media md-ratio="16:9">
         <img :src="url" alt="Skyscraper">
       </md-card-media>
@@ -69,13 +69,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.md-card {
-    width: 320px;
-    margin: 4px;
-    display: inline-block;
-    vertical-align: top;
-}
-
 .top {
   margin-bottom: 5%;
 }
