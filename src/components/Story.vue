@@ -4,7 +4,8 @@
     <md-table v-model="stories" md-card>
       <md-table-row slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="ID" md-sort-by="id">
-          {{ item.no }}
+          <story-detail-dialog :storyDetail="{ item }" />
+          <!-- {{ item.no }} -->
         </md-table-cell>
         <md-table-cell md-label="期間" md-sort-by="start_season">
           {{ item.start_season }} ~ {{ item.end_season }}
@@ -29,14 +30,14 @@
 <script>
 import firebase from 'firebase'
 import CsvDialog from './CsvDialog'
+import StoryDetailDialog from './StoryDetailDialog.vue'
 import MultiTag from './MultiTag'
 
 export default {
   name: 'Story',
   data () {
     return {
-      stories: [],
-      showDialog: false
+      stories: []
     }
   },
   created () {
@@ -44,6 +45,7 @@ export default {
   },
   components: {
     'csv-dialog': CsvDialog,
+    'story-detail-dialog': StoryDetailDialog,
     'multi-tag': MultiTag
   },
   methods: {
