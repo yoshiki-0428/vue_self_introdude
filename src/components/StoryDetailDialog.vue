@@ -143,7 +143,7 @@ export default {
   props: ['storyDetail'],
   components: {
     'multi-tag': MultiTag
-  },
+  }
 }
 </script>
 
