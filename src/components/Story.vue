@@ -3,8 +3,11 @@
     <h1>My story</h1>
     <md-table v-model="stories" md-card>
       <md-table-row slot="md-table-row" slot-scope="{ item }">
-        <md-table-cell md-label="期間" md-sort-by="start_period">
-          {{ item.start_period }} ~ {{ item.end_period }}
+        <md-table-cell md-label="ID" md-sort-by="id">
+          {{ item.no }}
+        </md-table-cell>
+        <md-table-cell md-label="期間" md-sort-by="start_season">
+          {{ item.start_season }} ~ {{ item.end_season }}
         </md-table-cell>
         <md-table-cell md-label="開発名称" md-sort-by="product_name">
           {{ item.product_name }}
@@ -44,16 +47,18 @@ export default {
     getStories: function () {
       var stories = []
       firebase.database().ref('story').on('value', snapshot => {
-        if (snapshot) {
-          Object.values(snapshot.val()).forEach(storyRef => stories.push(this.toStory(storyRef)))
-        }
+        Object.values(snapshot.val()).forEach(storyRef => stories.push(this.toStory(storyRef)))
+      },
+      error => {
+        console.log(error)
       })
       return stories
     },
     toStory: function (storyRef) {
       return {
-        start_period: storyRef.start_period,
-        end_period: storyRef.end_period,
+        no: storyRef.no,
+        start_season: storyRef.start_season,
+        end_season: storyRef.end_season,
         language: storyRef.language,
         product_name: storyRef.product_name,
         tools: storyRef.tools

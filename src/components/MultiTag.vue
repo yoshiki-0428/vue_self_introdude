@@ -12,7 +12,7 @@ export default {
   name: 'multiTag',
   data () {
     return {
-      tagArray: this.tags.split('/n')
+      tagArray: this.tags.split('\n')
     }
   },
   props: ['tags']
@@ -25,6 +25,7 @@ export default {
   margin-left: 1%;
   margin-top: 1%;
   margin-bottom: 1%;
+  /* font-size: 10px; */
 }
 
 small {
