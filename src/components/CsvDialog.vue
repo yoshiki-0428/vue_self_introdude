@@ -47,9 +47,10 @@ export default {
           overview: data.overview,
           role: data.role,
           scope: data.scope
-        },
-        error => {
-          console.log(error)
+        }, error => {
+          if (error) {
+            console.log(error)
+          }
         })
       })
     },

@@ -35,9 +35,12 @@ export default {
   name: 'Story',
   data () {
     return {
-      stories: this.getStories(),
+      stories: [],
       showDialog: false
     }
+  },
+  created () {
+    this.stories = this.getStories()
   },
   components: {
     'csv-dialog': CsvDialog,
@@ -47,22 +50,14 @@ export default {
     getStories: function () {
       var stories = []
       firebase.database().ref('story').on('value', snapshot => {
-        Object.values(snapshot.val()).forEach(storyRef => stories.push(this.toStory(storyRef)))
+        Object.values(snapshot.val()).forEach(storyRef => stories.push(storyRef))
       },
       error => {
-        console.log(error)
+        if (error) {
+          console.log(error)
+        }
       })
       return stories
-    },
-    toStory: function (storyRef) {
-      return {
-        no: storyRef.no,
-        start_season: storyRef.start_season,
-        end_season: storyRef.end_season,
-        language: storyRef.language,
-        product_name: storyRef.product_name,
-        tools: storyRef.tools
-      }
     }
   }
 }
