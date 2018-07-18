@@ -24,10 +24,10 @@ export default {
 
 <style>
 .top_picture {
-    width: 320px;
-    margin: 4px;
-    display: inline-block;
-    vertical-align: top;
+  width: 320px;
+  margin: 4px;
+  display: inline-block;
+  vertical-align: top;
 }
 
 #app {

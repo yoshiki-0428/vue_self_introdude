@@ -1,7 +1,7 @@
 
 <template>
   <div class="multiTag">
-    <md-chip v-for="tag in tagArray" md-clickable>
+    <md-chip v-for="tag in tagArray" v-bind:key="tag" md-clickable>
       {{ tag }}
     </md-chip>
   </div>
@@ -12,7 +12,7 @@ export default {
   name: 'multiTag',
   data () {
     return {
-      tagArray: this.tags.split("\n")
+      tagArray: this.tags.split('/n')
     }
   },
   props: ['tags']

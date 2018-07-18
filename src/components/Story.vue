@@ -33,7 +33,7 @@ export default {
   data () {
     return {
       stories: this.getStories(),
-      showDialog: false,
+      showDialog: false
     }
   },
   components: {
