@@ -21,13 +21,13 @@ export default {
 </script>
 
 <style scoped>
-  .md-chip {
-    margin-left: 1%;
-    margin-top: 1%;
-    margin-bottom: 1%;
-  }
+.md-chip {
+  margin-left: 1%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
 
-  small {
-    font-weight: 500;
-  }
+small {
+  font-weight: 500;
+}
 </style>
