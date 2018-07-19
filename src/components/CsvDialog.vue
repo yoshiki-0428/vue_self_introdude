@@ -42,8 +42,8 @@ export default {
           product_name: data.product_name,
           industry: data.industry,
           scale: data.scale,
-          language: data.language,
-          tools: data.tools,
+          language: data.language.split('\n'),
+          tools: data.tools.split('\n'),
           overview: data.overview,
           role: data.role,
           scope: data.scope

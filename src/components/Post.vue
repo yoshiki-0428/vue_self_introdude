@@ -10,8 +10,7 @@
       </a>
       <!-- TODO 無理矢理実装 -->
       <span class="md-subhead">{{ content.updated_at.split("T")[0] }}</span>
-      <!-- TODO multi-tagの引数を配列に変更 -->
-      <multi-tag :tags="tagsStr"></multi-tag>
+      <multi-tag :tags="content.tagsArray"/>
     </md-content><br />
 
     <h1>GitHub</h1>
@@ -26,8 +25,7 @@ export default {
   name: 'Post',
   data () {
     return {
-      contents: [],
-      tagsStr: ""
+      contents: []
     }
   },
   components: {
@@ -43,15 +41,8 @@ export default {
     Qiita.Resources.Item.list_user_items('yoshiki-0428', {per_page: 100}).then((item) => {
       item.forEach(content => {
         console.log(content)
-        console.log(content.title)
-        console.log(content.url)
-        console.log(content.updated_at)
-        console.log(content.tags)
         this.contents.push(content)
-        var tagNames = []
-        // TODO もっと省略できる
-        content.tags.forEach(tag => tagNames.push(tag.name))
-        this.tagsStr = tagNames.join('\n')
+        content['tagsArray'] = content.tags.map(tag => tag.name)
       })
     })
   }
