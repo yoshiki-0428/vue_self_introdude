@@ -10,11 +10,11 @@
           <md-card-content>
             <div class="md-layout md-gutter">
               <div class="md-layout-item md-small-size-100">
-                <md-field :class="getValidationClass('YourName')">
+                <md-field :class="getValidationClass('yourName')">
                   <label for="first-name">Your Name</label>
-                  <md-input name="first-name" id="first-name" autocomplete="given-name" v-model="form.YourName" :disabled="sending" />
-                  <span class="md-error" v-if="!$v.form.YourName.required">Your name is required</span>
-                  <span class="md-error" v-else-if="!$v.form.YourName.minlength">Invalid first name</span>
+                  <md-input name="first-name" id="first-name" autocomplete="given-name" v-model="form.yourName" :disabled="sending" />
+                  <span class="md-error" v-if="!$v.form.yourName.required">Your name is required</span>
+                  <span class="md-error" v-else-if="!$v.form.yourName.minlength">Invalid first name</span>
                 </md-field>
               </div>
             </div>
@@ -50,7 +50,7 @@
 
             <md-field>
               <label>Message</label>
-              <md-textarea v-model="message"></md-textarea>
+              <md-textarea v-model="form.message"></md-textarea>
             </md-field>
           </md-card-content>
 
@@ -75,16 +75,18 @@ import {
   minLength,
   maxLength
 } from 'vuelidate/lib/validators'
+import firebase from 'firebase'
 
 export default {
   name: 'FormValidation',
   mixins: [validationMixin],
   data: () => ({
     form: {
-      YourName: null,
+      yourName: null,
       gender: null,
       age: null,
-      email: null
+      email: null,
+      message: null
     },
     messageSend: false,
     sending: false,
@@ -92,7 +94,7 @@ export default {
   }),
   validations: {
     form: {
-      YourName: {
+      yourName: {
         required,
         minLength: minLength(3)
       },
@@ -121,18 +123,22 @@ export default {
     },
     clearForm () {
       this.$v.$reset()
-      this.form.YourName = null
-      this.form.lastName = null
+      this.form.yourName = null
       this.form.age = null
       this.form.gender = null
       this.form.email = null
     },
-    saveUser () {
+    saveContactMessage () {
       this.sending = true
+      console.log(this.form)
+
+      this.userName = `${this.form.yourName}`
+      firebase.database().ref('contact/' + this.form.yourName).set({
+        form: this.form
+      })
 
       // Instead of this timeout, here you can call your API
       window.setTimeout(() => {
-        this.userName = `${this.form.YourName}`
         this.messageSend = true
         this.sending = false
         this.clearForm()
@@ -142,7 +148,7 @@ export default {
       this.$v.$touch()
 
       if (!this.$v.$invalid) {
-        this.saveUser()
+        this.saveContactMessage()
       }
     }
   }
