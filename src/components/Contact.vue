@@ -133,6 +133,7 @@ export default {
       console.log(this.form)
 
       this.userName = `${this.form.yourName}`
+      // TODO 重複のためID採番
       firebase.database().ref('contact/' + this.form.yourName).set({
         form: this.form
       })
