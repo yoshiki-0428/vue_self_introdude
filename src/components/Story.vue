@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     getStories: function () {
-      var stories = []
+      const stories = []
       firebase.database().ref('story').on('value', snapshot => {
         Object.values(snapshot.val()).forEach(storyRef => stories.push(storyRef))
       },
@@ -66,7 +66,7 @@ export default {
 </script>
 
 <style scoped>
-.md-card {
+md-card {
   width: 80%;
   margin: 4px;
   display: inline-block;

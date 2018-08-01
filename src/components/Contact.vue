@@ -157,7 +157,7 @@ export default {
 </script>
 
 <style scoped>
-.md-progress-bar {
+md-progress-bar {
   position: absolute;
   top: 0;
   right: 0;

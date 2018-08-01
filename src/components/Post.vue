@@ -53,7 +53,6 @@ export default {
     console.log(this.githubContents)
     this.getQiita()
     console.log(this.qiitaContents)
-
   },
   methods: {
     getGithubRepos () {
@@ -62,10 +61,9 @@ export default {
         .then(response => {
           console.log('res', response)
           this.githubContents = response.data.sort((a, b) => a.updated_at < b.updated_at ? 1 : -1)
-
         }).catch(err => {
           console.log('err:', err)
-      })
+        })
     },
     getQiita () {
       const Qiita = require('qiita-js')
@@ -80,7 +78,7 @@ export default {
           content['tagsArray'] = content.tags.map(tag => tag.name)
         })
       })
-    },
+    }
   }
 }
 </script>
