@@ -55,16 +55,6 @@ export default {
     console.log(this.qiitaContents)
   },
   methods: {
-    getGithubRepos () {
-      const axios = require('axios')
-      axios.get('https://api.github.com/users/yoshiki-0428/repos')
-        .then(response => {
-          console.log('res', response)
-          this.githubContents = response.data.sort((a, b) => a.updated_at < b.updated_at ? 1 : -1)
-        }).catch(err => {
-          console.log('err:', err)
-        })
-    },
     getQiita () {
       const Qiita = require('qiita-js')
 
@@ -78,6 +68,16 @@ export default {
           content['tagsArray'] = content.tags.map(tag => tag.name)
         })
       })
+    },
+    getGithubRepos () {
+      const axios = require('axios')
+      axios.get('https://api.github.com/users/yoshiki-0428/repos')
+        .then(response => {
+          console.log('res', response)
+          this.githubContents = response.data.sort((a, b) => a.updated_at < b.updated_at ? 1 : -1)
+        }).catch(err => {
+          console.log('err:', err)
+        })
     }
   }
 }

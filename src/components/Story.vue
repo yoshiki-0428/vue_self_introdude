@@ -66,7 +66,7 @@ export default {
 </script>
 
 <style scoped>
-md-card {
+.md-card {
   width: 80%;
   margin: 4px;
   display: inline-block;

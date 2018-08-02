@@ -148,11 +148,11 @@ export default {
 </script>
 
 <style scoped>
-md-dialog {
+.md-dialog {
   width: 60%;
 }
 
-md-card {
+.md-card {
   width: auto;
   margin: 4px;
   display: inline-block;
