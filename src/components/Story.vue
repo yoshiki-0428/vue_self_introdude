@@ -3,12 +3,11 @@
     <h1>My story</h1>
     <md-table v-model="stories" md-card>
       <md-table-row slot="md-table-row" slot-scope="{ item }">
-        <md-table-cell md-label="ID" md-sort-by="id">
-          <story-detail-dialog :storyDetail="{ item }" />
-          <!-- {{ item.no }} -->
-        </md-table-cell>
-        <md-table-cell md-label="期間" md-sort-by="start_season">
+        <md-table-cell md-label="時期" md-sort-by="start_season">
           {{ item.start_season }} ~ {{ item.end_season }}
+        </md-table-cell>
+        <md-table-cell md-label="期間" md-sort-by="">
+          {{ item.period }}
         </md-table-cell>
         <md-table-cell md-label="開発名称" md-sort-by="product_name">
           {{ item.product_name }}
@@ -18,6 +17,9 @@
         </md-table-cell>
         <md-table-cell md-label="ツールなど" md-sort-by="tools">
           <multi-tag :tags="item.tools" />
+        </md-table-cell>
+        <md-table-cell md-label="詳細">
+          <md-button class="id_button" :to="'/story/'+item.no">→</md-button>
         </md-table-cell>
       </md-table-row>
     </md-table>
@@ -49,10 +51,10 @@ export default {
     'multi-tag': MultiTag
   },
   methods: {
-    getStories: function () {
+    getStories () {
       const stories = []
       firebase.database().ref('story').on('value', snapshot => {
-        Object.values(snapshot.val()).forEach(storyRef => stories.push(storyRef))
+        Object.values(snapshot.val()).forEach(storyRef => stories.push(this.shapeStory(storyRef)))
       },
       error => {
         if (error) {
@@ -60,6 +62,10 @@ export default {
         }
       })
       return stories
+    },
+    shapeStory (storyRef) {
+      storyRef.end_season = storyRef.end_season.replace(/\r?\n/g, '')
+      return storyRef
     }
   }
 }
@@ -67,7 +73,7 @@ export default {
 
 <style scoped>
 .md-card {
-  width: 80%;
+  width: 100%;
   margin: 4px;
   display: inline-block;
   vertical-align: top;

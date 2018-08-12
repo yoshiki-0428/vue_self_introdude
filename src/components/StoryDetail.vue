@@ -1,12 +1,14 @@
-<!-- 未使用ダイアログ -->
 
 <template>
-  <div class="storyDetailDialog">
-    <md-dialog :md-active.sync="showDialog">
+  <div class="storyDetail">
+    <h1>My story Detail</h1>
 
-      <md-dialog-title>Over Views</md-dialog-title>
+    <md-card class="top-card">
+      <md-card-header>
+        <h2>Over Views</h2>
+      </md-card-header>
       <div class="over_views">
-        <md-card md-with-hover>
+        <md-card md-with-hover class="inner-card">
           <md-card-area>
             <md-card-header>
               <span class="md-title">名称</span>
@@ -18,7 +20,7 @@
           </md-card-area>
         </md-card>
 
-        <md-card md-with-hover>
+        <md-card md-with-hover class="inner-card">
           <md-card-area>
             <md-card-header>
               <span class="md-title">時期</span><br />
@@ -30,7 +32,7 @@
           </md-card-area>
         </md-card>
 
-        <md-card md-with-hover>
+        <md-card md-with-hover class="inner-card">
           <md-card-area>
             <md-card-header>
               <span class="md-title">期間</span>
@@ -42,7 +44,7 @@
           </md-card-area>
         </md-card>
 
-        <md-card md-with-hover>
+        <md-card md-with-hover class="inner-card">
           <md-card-area>
             <md-card-header>
               <span class="md-title">業種</span>
@@ -54,7 +56,7 @@
           </md-card-area>
         </md-card>
 
-        <md-card md-with-hover>
+        <md-card md-with-hover class="inner-card">
           <md-card-area>
             <md-card-header>
               <span class="md-title">規模</span>
@@ -67,9 +69,11 @@
         </md-card>
       </div>
 
-      <md-dialog-title>Work Views</md-dialog-title>
+      <md-card-header>
+        <h2>Work Views</h2>
+      </md-card-header>
       <div class="work_views">
-        <md-card md-with-hover>
+        <md-card md-with-hover class="inner-card">
           <md-card-area>
             <md-card-header>
               <span class="md-title">言語</span>
@@ -81,7 +85,7 @@
           </md-card-area>
         </md-card>
 
-        <md-card md-with-hover>
+        <md-card md-with-hover class="inner-card">
           <md-card-area>
             <md-card-header>
               <span class="md-title">ツールなど</span>
@@ -93,7 +97,7 @@
           </md-card-area>
         </md-card>
 
-        <md-card md-with-hover>
+        <md-card md-with-hover class="inner-card">
           <md-card-area>
             <md-card-header>
               <span class="md-title">役割</span>
@@ -106,9 +110,11 @@
         </md-card>
       </div>
 
-      <md-dialog-title>Work Contents</md-dialog-title>
+      <md-card-header>
+        <h2>Work Contents</h2>
+      </md-card-header>
       <div class="work_contents">
-        <md-card md-with-hover>
+        <md-card md-with-hover class="inner-card">
           <md-card-area>
             <md-card-header>
               <span class="md-title">作業概要</span>
@@ -120,28 +126,26 @@
           </md-card-area>
         </md-card>
       </div>
-
-      <md-dialog-actions>
-        <md-button class="md-primary" @click="showDialog = false">✗</md-button>
-      </md-dialog-actions>
-    </md-dialog>
-
-    <md-button class="id_button" :md-dense="true" @click="showDialog = true">→</md-button>
+    </md-card>
   </div>
 </template>
 
 <script>
 import MultiTag from './MultiTag'
+import firebase from 'firebase'
 
 export default {
-  name: 'storyDetailDialog',
+  name: 'storyDetail',
   data () {
     return {
-      showDialog: false,
       story: this.storyDetail.item
     }
   },
-  props: ['storyDetail'],
+  created () {
+    firebase.database().ref('story/' + this.$route.params.id).on('value', snapshot => {
+      this.story = snapshot.val()
+    })
+  },
   components: {
     'multi-tag': MultiTag
   }
@@ -149,14 +153,16 @@ export default {
 </script>
 
 <style scoped>
-.md-dialog {
-  width: 60%;
-}
+  .top-card {
+    width: 80%;
+    margin: 4px;
+    display: inline-block;
+    vertical-align: top;
+  }
 
-.md-card {
-  width: auto;
-  margin: 4px;
-  display: inline-block;
-  vertical-align: top;
-}
+  .inner-card {
+    width: auto;
+    display: inline-block;
+    margin: 6px;
+  }
 </style>
