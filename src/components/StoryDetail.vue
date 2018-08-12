@@ -138,7 +138,7 @@ export default {
   name: 'storyDetail',
   data () {
     return {
-      story: this.storyDetail.item
+      story: ''
     }
   },
   created () {
