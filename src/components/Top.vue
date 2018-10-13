@@ -1,8 +1,17 @@
 <template>
   <div class="top">
-    <three/>
+    <div class="top-content">
+      <img class="logo" src="../assets/logo.png"/>
+      <h1 style="font-size: 40px;">
+        <a href="https://github.com/yoshiki-0428">Yoshiki-0428</a>
+      </h1>
+      <h1>I'm a developer / Web Programmer</h1>
+      <h1>Welcome my web page</h1>
+    </div>
+    <back-ground/>
+
     <!--<md-card class="top_picture">-->
-      <!--<md-card-media md-ratio="16:9">-->
+    <!--<md-card-media md-ratio="16:9">-->
         <!--<img :src="url" alt="Skyscraper">-->
       <!--</md-card-media>-->
 
@@ -59,7 +68,7 @@
 </template>
 
 <script>
-import Three from './Three'
+import backGround from './BackGround'
 
 export default {
   name: 'Top',
@@ -69,7 +78,7 @@ export default {
     }
   },
   components: {
-    'three': Three
+    'back-ground': backGround
   }
 }
 </script>
@@ -78,6 +87,21 @@ export default {
 <style scoped>
 .top {
   margin-bottom: 5%;
+  alignment: center;
+}
+
+.top-content {
+  width: 100%;
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 1;
+  position: fixed;
+}
+
+.logo {
+  width: 200px;
+  height: 200px;
 }
 
 .footer{

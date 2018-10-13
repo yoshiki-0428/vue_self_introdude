@@ -5,7 +5,6 @@ import Story from '@/components/Story'
 import StoryDetail from '@/components/StoryDetail'
 import Post from '@/components/Post'
 import Contact from '@/components/Contact'
-import Three from '@/components/Three'
 import NotFound from '@/components/NotFound'
 
 Vue.use(Router)
@@ -37,11 +36,6 @@ export default new Router({
       path: '/contact',
       name: 'contact',
       component: Contact
-    },
-    {
-      path: '/three',
-      name: 'three',
-      component: Three
     },
     {
       path: '*',
