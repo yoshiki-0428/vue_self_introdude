@@ -19,6 +19,7 @@ export default {
 
 .header {
   top: 0;
+  height: 72px;
   width: 100%;
 }
 </style>

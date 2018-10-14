@@ -10,17 +10,16 @@ import * as THREE from 'three'
 export default {
 
   name: 'backGround',
-
   data () {
     // === scene ===
     const scene = new THREE.Scene()
 
     // === renderer ===
     const renderer = new THREE.WebGLRenderer({alpha: true})
-    renderer.setSize(window.innerWidth, window.innerHeight)
+    renderer.setSize(window.innerWidth, window.innerHeight - 160)
 
     // === camera ===
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / (window.innerHeight - 160), 0.1, 1000)
     camera.position.z = 5
 
     // === light ===
@@ -72,12 +71,12 @@ export default {
   methods: {
     animate () {
       // 再帰により回転動作を繰り返す
+      requestAnimationFrame(this.animate)
       this.cube.rotation.z += 0.01
       this.cubeHorizon.rotation.y += 0.01
-      this.cubeVertical.rotation.x += 0.01
 
+      this.cubeVertical.rotation.x += 0.01
       /* レンダリングオブジェクトにシーンとカメラを追加してレンダリング開始 */
-      requestAnimationFrame(this.animate)
       this.renderer.render(this.scene, this.camera)
     },
     zoomCamera () {
