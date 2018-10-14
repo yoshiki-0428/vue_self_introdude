@@ -57,9 +57,9 @@ export default {
     this.cube.position.set(0, 0.5, 0)
     this.cubeVertical.position.set(0, 0.5, 0)
     this.cubeHorizon.position.set(0, 0.5, 0)
-
     // === 画面全体のクリックイベントを設定 ===
     window.onclick = () => this.zoomCamera()
+    window.setTimeout(this.moveCube, 5000)
   },
 
   mounted () {
@@ -74,7 +74,6 @@ export default {
       requestAnimationFrame(this.animate)
       this.cube.rotation.z += 0.01
       this.cubeHorizon.rotation.y += 0.01
-
       this.cubeVertical.rotation.x += 0.01
       /* レンダリングオブジェクトにシーンとカメラを追加してレンダリング開始 */
       this.renderer.render(this.scene, this.camera)
@@ -88,6 +87,32 @@ export default {
       if (this.camera.position.z < 0) {
         this.camera.position.z = 5
         cancelAnimationFrame(requestId)
+      }
+      this.renderer.render(this.scene, this.camera)
+    },
+    moveCube () {
+      // 再帰により移動処理を繰り返す
+      const requestId = requestAnimationFrame(this.moveCube)
+      this.cubeHorizon.position.x += 0.01
+      this.cubeVertical.position.x -= 0.01
+
+      // キューブ位置が5になった時点処理終了
+      if (this.cubeHorizon.position.x > 5 && this.cubeVertical.position.x < -5) {
+        cancelAnimationFrame(requestId)
+        this.moveMinusCube()
+      }
+      this.renderer.render(this.scene, this.camera)
+    },
+    moveMinusCube () {
+      // 再帰により移動処理を繰り返す
+      const requestId = requestAnimationFrame(this.moveMinusCube)
+      this.cubeHorizon.position.x -= 0.01
+      this.cubeVertical.position.x += 0.01
+
+      // キューブ位置が-5になった時点処理終了
+      if (this.cubeHorizon.position.x < -5 && this.cubeVertical.position.x > 5) {
+        cancelAnimationFrame(requestId)
+        this.moveCube()
       }
       this.renderer.render(this.scene, this.camera)
     }
