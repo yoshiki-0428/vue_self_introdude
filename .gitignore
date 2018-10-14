@@ -6,6 +6,7 @@
 **/node_modules/*
 **/.firebaserc
 firebase-config.js
+.firebase/
 
 ### Node ###
 # Logs
