@@ -4,16 +4,19 @@
       <a href="https://qiita.com/yoshiki-0428" target="_brank">Qiita</a>
     </h1>
     <hr />
-    <md-content v-for="content in qiitaContents" v-bind:key="content.id" >
-      <a
-        :href="content.url"
-        target="_blank">
-        {{ content.title }}
-      </a>
-      <span class="md-subhead">{{ content.updated_at.split("T")[0] }}</span>
-      <multi-tag :tags="content.tagsArray"/>
-    </md-content><br />
 
+    <div class="github_content" v-for="content in qiitaContents" v-bind:key="content.id" >
+      <md-card class="content_card">
+        <md-card-header>
+          <a class="md-title" :href="content.url" target="_brank" style="font-size: 15px">{{ content.title }}</a><br />
+          <span>updated: {{ content.updated_at.split("T")[0] }}, </span>
+          <span>language: {{ content.language }}</span>
+        </md-card-header>
+        <md-card-content v-if="content.tagsArray">
+          <multi-tag :tags="content.tagsArray"/>
+        </md-card-content>
+      </md-card>
+    </div>
     <h1>
       <a href="https://github.com/yoshiki-0428" target="_brank">GitHub</a>
     </h1>
@@ -50,9 +53,7 @@ export default {
   },
   created () {
     this.getGithubRepos()
-    console.log(this.githubContents)
     this.getQiita()
-    console.log(this.qiitaContents)
   },
   methods: {
     getQiita () {

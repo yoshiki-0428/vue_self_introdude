@@ -74,8 +74,12 @@ export default {
 <style scoped>
 .md-card {
   width: 100%;
-  margin: 4px;
   display: inline-block;
   vertical-align: top;
+}
+
+.md-table-cell-container {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 </style>

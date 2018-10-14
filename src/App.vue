@@ -38,7 +38,7 @@ h1, h2 {
   font-family: Coda;
   font-weight: bold;
   line-height: 30px;
-  margin-top: 0px;
+  margin-top: 5px;
 }
 
 </style>

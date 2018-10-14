@@ -157,6 +157,10 @@ export default {
 </script>
 
 <style scoped>
+.md-layout {
+  margin-top: 10px;
+}
+
 md-progress-bar {
   position: absolute;
   top: 0;
