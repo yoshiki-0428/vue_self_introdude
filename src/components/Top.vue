@@ -7,6 +7,13 @@
       </h1>
       <h1>I'm a developer / Web Programmer</h1>
       <h1>Welcome my web page</h1>
+
+      <!--TODO スクロール部分の実装-->
+      <!--<h1 class="scroll">-->
+        <!--<md-icon class="md-size-2x">keyboard_arrow_down</md-icon>-->
+        <!--Scroll Down-->
+        <!--<md-icon class="md-size-2x">keyboard_arrow_down</md-icon>-->
+      <!--</h1>-->
     </div>
     <back-ground/>
     <y-footer/>
@@ -50,6 +57,10 @@ export default {
 .name {
   font-size: 40px;
   margin-top: 10px;
+}
+
+.scroll {
+  padding-top: 5%;
 }
 
 .name:hover {

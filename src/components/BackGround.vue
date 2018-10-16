@@ -105,7 +105,7 @@ export default {
     },
     moveCube2 () {
       // 再帰により移動処理を繰り返す
-      const requestId = requestAnimationFrame(this.moveMinusCube)
+      const requestId = requestAnimationFrame(this.moveCube2)
       this.cubeHorizon.position.x -= 0.01
       this.cubeVertical.position.x += 0.01
 
