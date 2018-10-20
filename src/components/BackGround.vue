@@ -96,20 +96,20 @@ export default {
       this.cubeHorizon.position.x += 0.01
       this.cubeVertical.position.x -= 0.01
 
-      // キューブ位置が5になった時点処理終了
+      // それぞれのキューブ位置が端に行った時点で処理終了
       if (this.cubeHorizon.position.x > 5 && this.cubeVertical.position.x < -5) {
         cancelAnimationFrame(requestId)
-        this.moveMinusCube()
+        this.moveCube2()
       }
       this.renderer.render(this.scene, this.camera)
     },
-    moveMinusCube () {
+    moveCube2 () {
       // 再帰により移動処理を繰り返す
       const requestId = requestAnimationFrame(this.moveMinusCube)
       this.cubeHorizon.position.x -= 0.01
       this.cubeVertical.position.x += 0.01
 
-      // キューブ位置が-5になった時点処理終了
+      // それぞれのキューブ位置が端に行った時点で処理終了
       if (this.cubeHorizon.position.x < -5 && this.cubeVertical.position.x > 5) {
         cancelAnimationFrame(requestId)
         this.moveCube()

@@ -10,16 +10,13 @@
           {{ item.period }}
         </md-table-cell>
         <md-table-cell md-label="開発名称" md-sort-by="product_name">
-          {{ item.product_name }}
+          <md-button :to="'/story/'+item.no">{{ item.product_name }}</md-button>
         </md-table-cell>
         <md-table-cell md-label="言語" md-sort-by="language">
           <multi-tag :tags="item.language" />
         </md-table-cell>
         <md-table-cell md-label="ツールなど" md-sort-by="tools">
           <multi-tag :tags="item.tools" />
-        </md-table-cell>
-        <md-table-cell md-label="詳細">
-          <md-button class="id_button" :to="'/story/'+item.no">→</md-button>
         </md-table-cell>
       </md-table-row>
     </md-table>
