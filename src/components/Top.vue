@@ -1,6 +1,6 @@
 <template>
   <div class="top">
-    <div class="top-content">
+    <div class="content">
       <img class="logo" src="../assets/logo.png"/>
       <h1 class="name">
         <a href="https://github.com/yoshiki-0428">Yoshiki-0428</a>
@@ -40,7 +40,7 @@ export default {
   alignment: center;
 }
 
-.top-content {
+.top .content {
   width: 100%;
   margin-top: 5%;
   margin-left: auto;
@@ -49,21 +49,22 @@ export default {
   position: fixed;
 }
 
-.logo {
+.top .content .logo {
   width: 100px;
   height: 100px;
 }
 
-.name {
+.top .content .name {
   font-size: 40px;
   margin-top: 10px;
 }
 
-.scroll {
-  padding-top: 5%;
-}
-
-.name:hover {
+.top .content .name:hover {
   text-decoration: underline;
 }
+
+.scroll {
+padding-top: 5%;
+}
+
 </style>

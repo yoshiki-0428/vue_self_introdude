@@ -21,7 +21,7 @@
       </md-table-row>
     </md-table>
 
-    <csv-dialog/>
+    <!--<csv-dialog/>-->
 
   </div>
 </template>

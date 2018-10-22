@@ -1,6 +1,6 @@
 <template>
-  <div id="not_found">
-    <md-card class="top_picture">
+  <div class="not_found">
+    <md-card class="content">
       <md-card-media md-ratio="16:9">
         <img :src="url" alt="Skyscraper">
       </md-card-media>
@@ -27,3 +27,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .not_found .content {
+    width: 320px;
+    margin: 4px;
+    display: inline-block;
+    vertical-align: top;
+  }
+</style>
