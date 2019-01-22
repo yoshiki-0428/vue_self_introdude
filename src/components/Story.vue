@@ -1,35 +1,29 @@
-<template>
-  <div class="story">
-    <h1>My story</h1>
-    <md-table v-model="stories" md-card>
-      <md-table-row slot="md-table-row" slot-scope="{ item }">
-        <md-table-cell md-label="時期" md-sort-by="start_season">
-          {{ item.start_season }} ~ {{ item.end_season }}
-        </md-table-cell>
-        <md-table-cell md-label="期間" md-sort-by="">
-          {{ item.period }}
-        </md-table-cell>
-        <md-table-cell md-label="開発名称" md-sort-by="product_name">
-          <md-button :to="'/story/'+item.no">{{ item.product_name }}</md-button>
-        </md-table-cell>
-        <md-table-cell md-label="言語" md-sort-by="language">
-          <multi-tag :tags="item.language" />
-        </md-table-cell>
-        <md-table-cell md-label="ツールなど" md-sort-by="tools">
-          <multi-tag :tags="item.tools" />
-        </md-table-cell>
-      </md-table-row>
-    </md-table>
-
-    <!--<csv-dialog/>-->
-
-  </div>
+<template lang="pug">
+  .story
+    h1 My story
+      |
+      md-table(v-model='stories', md-card='')
+        md-table-row(slot='md-table-row', slot-scope='{ item }')
+          md-table-cell(md-label='時期', md-sort-by='start_season')
+            | {{ item.start_season }} ~ {{ item.end_season }}
+          |
+          md-table-cell(md-label='期間', md-sort-by='')
+            | {{ item.period }}
+          |
+          md-table-cell(md-label='開発名称', md-sort-by='product_name')
+            md-button(:to="'/story/'+item.no") {{ item.product_name }}
+          |
+          md-table-cell(md-label='言語', md-sort-by='language')
+            multi-tag(:tags='item.language')
+          |
+          md-table-cell(md-label='ツールなど', md-sort-by='tools')
+            multi-tag(:tags='item.tools')
+      // <csv-dialog/>
 </template>
 
 <script>
 import firebase from 'firebase'
 import CsvDialog from './CsvDialog'
-import StoryDetailDialog from './StoryDetailDialog.vue'
 import MultiTag from './MultiTag'
 
 export default {
@@ -43,9 +37,8 @@ export default {
     this.stories = this.getStories()
   },
   components: {
-    'csv-dialog': CsvDialog,
-    'story-detail-dialog': StoryDetailDialog,
-    'multi-tag': MultiTag
+    CsvDialog,
+    MultiTag
   },
   methods: {
     getStories () {

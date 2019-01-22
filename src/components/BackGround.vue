@@ -1,7 +1,6 @@
-<template>
-  <div class="stage" ref="stage">
-    <div ref="stage"></div>
-  </div>
+<template lang="pug">
+  .stage(ref='stage')
+    div(ref='stage')
 </template>
 
 <script>

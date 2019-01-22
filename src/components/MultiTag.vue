@@ -1,10 +1,7 @@
-
-<template>
-  <div class="multiTag">
-    <md-chip v-for="tag in tags" v-bind:key="tag" md-clickable>
-      {{ tag }}
-    </md-chip>
-  </div>
+<template lang="pug">
+  .multiTag
+    md-chip(v-for="tag in tags" v-bind:key="tag" md-clickable)
+      | {{ tag }}
 </template>
 
 <script>
@@ -19,11 +16,10 @@ export default {
 </script>
 
 <style scoped>
-md-chip {
+.md-chip {
   margin-left: 1%;
   margin-top: 1%;
   margin-bottom: 1%;
-  /* font-size: 10px; */
 }
 
 small {

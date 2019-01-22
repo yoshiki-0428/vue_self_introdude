@@ -1,18 +1,15 @@
-<template>
-  <div id="app">
-    <y-header/>
-    <router-view/>
-  </div>
+<template lang="pug">
+  #app
+    main-header
+    router-view
 </template>
 
 <script>
-import Header from './components/Header'
+import MainHeader from './components/MainHeader'
 
 export default {
   name: 'App',
-  components: {
-    'y-header': Header
-  }
+  components: { MainHeader }
 }
 
 </script>

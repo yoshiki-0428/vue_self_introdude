@@ -1,20 +1,17 @@
-<template>
-  <div class="not_found">
-    <md-card class="content">
-      <md-card-media md-ratio="16:9">
-        <img :src="url" alt="Skyscraper">
-      </md-card-media>
-
-      <md-card-area>
-        <md-card-header>
-          <span class="md-title">Not Found Page...</span><br />
-          <span class="md-subhead">
-            Return to <a href="/#/top">Top</a>
-          </span>
-        </md-card-header>
-      </md-card-area>
-    </md-card>
-  </div>
+<template lang="pug">
+  .not_found
+    md-card.content
+      md-card-media(md-ratio='16:9')
+        img(:src='url', alt='Skyscraper')
+      |
+      md-card-area
+        md-card-header
+          span.md-title Not Found Page...
+          br
+          |
+          span.md-subhead
+            h3
+              a(href='/#/top') Goto Top
 </template>
 
 <script>

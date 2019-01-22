@@ -1,35 +1,34 @@
-<template>
-  <div class="top">
-    <div class="content">
-      <img class="logo" src="../assets/logo.png"/>
-      <h1 class="name">
-        <a href="https://github.com/yoshiki-0428">Yoshiki-0428</a>
-      </h1>
-      <h1>I'm a developer / Web Programmer</h1>
-      <h1>Welcome my web page</h1>
-
-      <!--TODO スクロール部分の実装-->
-      <!--<h1 class="scroll">-->
-        <!--<md-icon class="md-size-2x">keyboard_arrow_down</md-icon>-->
-        <!--Scroll Down-->
-        <!--<md-icon class="md-size-2x">keyboard_arrow_down</md-icon>-->
-      <!--</h1>-->
-    </div>
-    <back-ground/>
-    <y-footer/>
-  </div>
-
+<template lang="pug">
+  .top
+    .content
+      img.logo(src='../assets/logo.png')
+      |
+      h1.name
+        a(href='https://github.com/yoshiki-0428') Yoshiki-0428
+      |
+      h1 I'm a developer / Web Programmer
+      |
+      h1 Welcome my web page
+      // TODO スクロール部分の実装
+      // <h1 class="scroll">
+      // <md-icon class="md-size-2x">keyboard_arrow_down</md-icon>
+      // Scroll Down
+      // <md-icon class="md-size-2x">keyboard_arrow_down</md-icon>
+      // </h1>
+    |
+    back-ground
+    main-footer
 </template>
 
 <script>
-import backGround from './BackGround'
-import footer from './Footer'
+import BackGround from './BackGround'
+import MainFooter from './MainFooter'
 
 export default {
   name: 'Top',
   components: {
-    'back-ground': backGround,
-    'y-footer': footer
+    BackGround,
+    MainFooter
   }
 }
 </script>

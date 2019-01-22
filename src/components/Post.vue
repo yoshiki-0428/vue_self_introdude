@@ -1,40 +1,40 @@
-<template>
-  <div class="post">
-    <h1>
-      <a href="https://qiita.com/yoshiki-0428" target="_brank">Qiita</a>
-    </h1>
-    <hr />
-
-    <div class="github_content" v-for="content in qiitaContents" v-bind:key="content.id" >
-      <md-card class="content_card">
-        <md-card-header>
-          <a class="md-title" :href="content.url" target="_brank" style="font-size: 15px">{{ content.title }}</a><br />
-          <span>updated: {{ content.updated_at.split("T")[0] }}, </span>
-          <span>language: {{ content.language }}</span>
-        </md-card-header>
-        <md-card-content v-if="content.tagsArray">
-          <multi-tag :tags="content.tagsArray"/>
-        </md-card-content>
-      </md-card>
-    </div>
-    <h1>
-      <a href="https://github.com/yoshiki-0428" target="_brank">GitHub</a>
-    </h1>
-    <hr />
-
-    <div class="github_content" v-for="content in githubContents" v-bind:key="content.id" >
-      <md-card class="content_card">
-        <md-card-header>
-          <a class="md-title" :href="content.html_url" target="_brank">{{ content.name }}</a><br />
-          <span>updated: {{ content.updated_at.split("T")[0] }}, </span>
-          <span>language: {{ content.language }}</span>
-        </md-card-header>
-        <md-card-content v-if="content.description">
-          <span class="md-subhead">{{ content.description }}</span>
-        </md-card-content>
-      </md-card>
-    </div>
-  </div>
+<template lang="pug">
+  .post
+    h1
+      a(href='https://qiita.com/yoshiki-0428', target='_brank') Qiita
+    |
+    hr
+    |
+    .github_content(v-for='content in qiitaContents', v-bind:key='content.id')
+      md-card.content_card
+        md-card-header
+          a.md-title(:href='content.url', target='_brank', style='font-size: 15px') {{ content.title }}
+          br
+          |
+          span updated: {{ content.updated_at.split(&quot;T&quot;)[0] }},
+          |
+          span language: {{ content.language }}
+        |
+        md-card-content(v-if='content.tagsArray')
+          multi-tag(:tags='content.tagsArray')
+    |
+    h1
+      a(href='https://github.com/yoshiki-0428', target='_brank') GitHub
+    |
+    hr
+    |
+    .github_content(v-for='content in githubContents', v-bind:key='content.id')
+      md-card.content_card
+        md-card-header
+          a.md-title(:href='content.html_url', target='_brank') {{ content.name }}
+          br
+          |
+          span updated: {{ content.updated_at.split(&quot;T&quot;)[0] }},
+          |
+          span language: {{ content.language }}
+        |
+        md-card-content(v-if='content.description')
+          span.md-subhead {{ content.description }}
 </template>
 
 <script>
