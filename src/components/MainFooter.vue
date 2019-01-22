@@ -1,22 +1,21 @@
 <template lang="pug">
   .footer
     h2 My Social Links
-      |
       ul
         li
+          md-icon public
           a(href='https://twitter.com/yoshiki_pg0428', target='_blank')
-            md-icon public
-            |           Twitter
+            | Twitter
         |
         li
+          md-icon camera_alt
           a(href='https://www.instagram.com/yoshiki_04_28/', target='_blank')
-            md-icon camera_alt
-            |           Instagram
+            | Instagram
         |
         li
+          md-icon face
           a(href='https://www.facebook.com/profile.php?id=100005275263520', target='_blank')
-            md-icon face
-            |           Facebook
+            | Facebook
 </template>
 
 <script>
