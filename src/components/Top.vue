@@ -6,7 +6,10 @@
       h1.name
         a(href='https://github.com/yoshiki-0428') Yoshiki-0428
       |
-      h1 I'm a developer / Web Programmer
+      vue-typer(
+        text="I'm a developer / Web Programmer"
+        :repeat="2"
+      )
       |
       h1 Welcome my web page
       // TODO スクロール部分の実装
@@ -23,12 +26,14 @@
 <script>
 import BackGround from './BackGround'
 import MainFooter from './MainFooter'
+import { VueTyper } from 'vue-typer'
 
 export default {
   name: 'Top',
   components: {
     BackGround,
-    MainFooter
+    MainFooter,
+    VueTyper
   }
 }
 </script>
@@ -64,6 +69,19 @@ export default {
 
 .scroll {
 padding-top: 5%;
+}
+
+span.vue-typer {
+  font-family: Orbitron;
+  font-family: M PLUS 1p;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  font-family: Coda;
+  font-weight: bold;
+  line-height: 30px;
+  margin-top: 5px;
 }
 
 </style>
