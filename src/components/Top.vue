@@ -9,6 +9,7 @@
       vue-typer(
         text="I'm a developer / Web Programmer"
         :repeat="2"
+        erase-style='select-back'
       )
       |
       h1 Welcome my web page
@@ -68,20 +69,26 @@ export default {
 }
 
 .scroll {
-padding-top: 5%;
+  padding-top: 5%;
 }
 
-span.vue-typer {
-  font-family: Orbitron;
-  font-family: M PLUS 1p;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  font-family: Coda;
+.vue-typer {
+  font-family: Coda, serif;
   font-weight: bold;
-  line-height: 30px;
-  margin-top: 5px;
+  font-size: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.vue-typer .custom.char.selected {
+  color: #607D8B;
+  background-color: transparent;
+  text-decoration: line-through;
+  height: 40px;
+}
+
+.vue-typer .custom.caret {
+  display: none;
 }
 
 </style>
