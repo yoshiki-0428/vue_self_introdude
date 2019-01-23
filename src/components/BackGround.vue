@@ -16,7 +16,9 @@ export default {
       light: this.light,
       cube: this.cube,
       cubeVertical: this.cubeVertical,
-      cubeHorizon: this.cubeHorizon
+      cubeHorizon: this.cubeHorizon,
+      geometry: this.geometry,
+      isCameraMoved: true
     }
   },
 
@@ -24,7 +26,12 @@ export default {
     this.initThree()
     this.setThree()
     // === 画面全体のクリックイベントを設定 ===
-    window.onclick = () => this.zoomCamera()
+    window.onclick = () => {
+      if (this.isCameraMoved) {
+        this.isCameraMoved = false
+        this.zoomCamera()
+      }
+    }
     window.setTimeout(this.moveCube, 5000)
     // === リサイズ対応 ===
     window.addEventListener('resize', this.onResize)
@@ -55,13 +62,13 @@ export default {
 
       // === model ===
       const cubeSize = 2.5
-      const geometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize)
+      this.geometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize)
       this.material = new THREE.MeshNormalMaterial({color: 0x00ff00})
 
       // === cubes ===
-      this.cube = new THREE.Mesh(geometry, this.material)
-      this.cubeVertical = new THREE.Mesh(geometry, this.material)
-      this.cubeHorizon = new THREE.Mesh(geometry, this.material)
+      this.cube = new THREE.Mesh(this.geometry, this.material)
+      this.cubeVertical = new THREE.Mesh(this.geometry, this.material)
+      this.cubeHorizon = new THREE.Mesh(this.geometry, this.material)
     },
     setThree () {
       // === sceneにmodel,light, cameraを追加 ===
@@ -91,6 +98,7 @@ export default {
 
       // カメラの奥行き位置が0になった時点で初期化
       if (this.camera.position.z < 0) {
+        this.isCameraMoved = true
         this.camera.position.z = 5
         cancelAnimationFrame(requestId)
       }
