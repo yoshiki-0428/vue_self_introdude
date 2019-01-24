@@ -16,6 +16,7 @@ export default {
   data () {
     return {
       stories: [],
+      story: this.stories[0],
       url: 'https://script.google.com/macros/s/AKfycbwoDWgY7IDhIKYGsy6afqCM-lhcPvDcVUAaxMrh6p8DSoqTPQ/exec'
     }
   },
