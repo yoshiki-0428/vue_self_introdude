@@ -2,60 +2,40 @@
   .story
     h1 My story
       |
-      md-table(v-model='stories', md-card='')
-        md-table-row(slot='md-table-row', slot-scope='{ item }')
-          md-table-cell(md-label='時期', md-sort-by='start_season')
-            | {{ item.start_season }} ~ {{ item.end_season }}
-          |
-          md-table-cell(md-label='期間', md-sort-by='')
-            | {{ item.period }}
-          |
-          md-table-cell(md-label='開発名称', md-sort-by='product_name')
-            md-button(:to="'/story/'+item.no") {{ item.product_name }}
-          |
-          md-table-cell(md-label='言語', md-sort-by='language')
-            multi-tag(:tags='item.language')
-          |
-          md-table-cell(md-label='ツールなど', md-sort-by='tools')
-            multi-tag(:tags='item.tools')
-      // <csv-dialog/>
+    md-button.md-primary(@click='getStoriesByGas') test
+
 </template>
 
 <script>
-import firebase from 'firebase'
 import CsvDialog from './CsvDialog'
 import MultiTag from './MultiTag'
+import axios from 'axios'
 
 export default {
   name: 'Story',
   data () {
     return {
-      stories: []
+      stories: [],
+      url: 'https://script.google.com/macros/s/AKfycbwoDWgY7IDhIKYGsy6afqCM-lhcPvDcVUAaxMrh6p8DSoqTPQ/exec'
     }
   },
   created () {
-    this.stories = this.getStories()
+    this.stories = this.getStoriesByGas()
   },
   components: {
     CsvDialog,
     MultiTag
   },
   methods: {
-    getStories () {
-      const stories = []
-      firebase.database().ref('story').on('value', snapshot => {
-        Object.values(snapshot.val()).forEach(storyRef => stories.push(this.shapeStory(storyRef)))
-      },
-      error => {
-        if (error) {
-          console.log(error)
-        }
-      })
-      return stories
-    },
-    shapeStory (storyRef) {
-      storyRef.end_season = storyRef.end_season.replace(/\r?\n/g, '')
-      return storyRef
+    getStoriesByGas () {
+      axios
+        .get(this.url)
+        .then(res => {
+          this.stories = res.data.filter(v => v.no !== '')
+          console.log(this.stories)
+        }).catch(err => {
+          console.log(err)
+        })
     }
   }
 }
