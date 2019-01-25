@@ -14,28 +14,29 @@ export default {
 
 </script>
 
-<style>
+<style lang="sass">
+  $english: Coda, serif
+  $japanese: Sawarabi Gothic, serif
 
-#app {
-  font-family: Orbitron;
-  font-family: M PLUS 1p;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  #app
+    font-family: $english
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+    text-align: center
+    color: #2c3e50
 
-/* フォントドラッグ時カラー指定 */
-.md-theme-default :not(input):not(textarea)::selection {
-  background-color: #080808;
-  color: #ffffff;
-}
+  .japanese-font
+    font-family: $japanese
 
-h1, h2 {
-  font-family: Coda;
-  font-weight: bold;
-  line-height: 30px;
-  margin-top: 5px;
-}
+  .main_title
+    text-align: center
+    &__content
+      padding: 2%
+      font-weight: bold
+      font-size: 1.5rem
 
+  /* フォントドラッグ時カラー指定 */
+  .md-theme-default :not(input):not(textarea)::selection
+    background-color: #080808
+    color: #ffffff
 </style>

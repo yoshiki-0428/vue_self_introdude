@@ -1,14 +1,13 @@
 <template lang="pug">
-  .post
-    h1
-      a(href='https://qiita.com/yoshiki-0428', target='_brank') Qiita
+  .main_title.main_title__content
+    a(href='https://qiita.com/yoshiki-0428', target='_brank') Qiita
     |
     hr
     |
     .github_content(v-for='content in qiitaContents', v-bind:key='content.id')
       md-card.content_card
         md-card-header
-          a.md-title(:href='content.url', target='_brank', style='font-size: 15px') {{ content.title }}
+          a.md-title.japanese-font(:href='content.url', target='_brank', style='font-size: 15px') {{ content.title }}
           br
           |
           span updated: {{ content.updated_at.split(&quot;T&quot;)[0] }},
@@ -18,7 +17,7 @@
         md-card-content(v-if='content.tagsArray')
           multi-tag(:tags='content.tagsArray')
     |
-    h1
+    .main_title.main_title__content
       a(href='https://github.com/yoshiki-0428', target='_brank') GitHub
     |
     hr
