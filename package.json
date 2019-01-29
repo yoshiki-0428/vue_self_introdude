@@ -14,7 +14,7 @@
     "axios": "^0.18.0",
     "csv-parser": "^1.12.1",
     "firebase": "^5.5.4",
-    "firebase-tools": "^5.0.1",
+    "firebase-tools": "^5.1.1",
     "material-design-icons": "^3.0.1",
     "qiita-js": "^0.4.3",
     "standard-version": "^4.4.0",

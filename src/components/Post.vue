@@ -6,13 +6,13 @@
     |
     .github_content(v-for='content in qiitaContents', v-bind:key='content.id')
       md-card.content_card
-        md-card-header
+        md-card-header-text
           a.md-title.japanese-font(:href='content.url', target='_brank', style='font-size: 15px') {{ content.title }}
-          br
+          p
+            | updated: {{ content.updated_at.split(&quot;T&quot;)[0] }}
           |
-          span updated: {{ content.updated_at.split(&quot;T&quot;)[0] }},
-          |
-          span language: {{ content.language }}
+          p(v-if="content.language")
+            | language: {{ content.language }}
         |
         md-card-content(v-if='content.tagsArray')
           multi-tag(:tags='content.tagsArray')
@@ -28,9 +28,9 @@
           a.md-title(:href='content.html_url', target='_brank') {{ content.name }}
           br
           |
-          span updated: {{ content.updated_at.split(&quot;T&quot;)[0] }},
+          p updated: {{ content.updated_at.split(&quot;T&quot;)[0] }},
           |
-          span language: {{ content.language }}
+          p(v-if="content.language") language: {{ content.language }}
         |
         md-card-content(v-if='content.description')
           span.md-subhead {{ content.description }}
@@ -73,7 +73,6 @@ export default {
       const axios = require('axios')
       axios.get('https://api.github.com/users/yoshiki-0428/repos')
         .then(response => {
-          console.log('res', response)
           this.githubContents = response.data.sort((a, b) => a.updated_at < b.updated_at ? 1 : -1)
         }).catch(err => {
           console.log('err:', err)
