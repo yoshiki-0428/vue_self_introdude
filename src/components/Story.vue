@@ -32,7 +32,11 @@
                 multi-tag(
                 :tags="item.tools.split('\\n')"
                 )
-              md-button(:to="'/story/'+item.no") Detail
+              md-button(
+                style="margin-top: 3%"
+                class="md-raised"
+                :to="'/story/'+item.no"
+              ) Detail
             md-card-media-cover
               md-card-media(
                 md-big
@@ -40,8 +44,8 @@
               )
                 img(:src="item.image_url")
               md-card-media(
-                style="padding: 2%"
-                md-medium
+                style="padding-top: 3%"
+                md-big
                 v-if="item.image_url2"
               )
                 img(:src="item.image_url2")
@@ -98,10 +102,10 @@ export default {
     display: flex
 
   .v-enter-active
-    transition: all .5s ease
+    transition: all .2s ease
 
   .v-leave-active
-    transition: all .5s
+    transition: all .2s
 
   .v-enter, .v-leave-to
     transform: translateX(10px)
