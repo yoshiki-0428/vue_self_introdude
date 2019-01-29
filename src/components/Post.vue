@@ -24,9 +24,8 @@
     |
     .github_content(v-for='content in githubContents', v-bind:key='content.id')
       md-card.content_card
-        md-card-header
+        md-card-header-text
           a.md-title(:href='content.html_url', target='_brank') {{ content.name }}
-          br
           |
           p updated: {{ content.updated_at.split(&quot;T&quot;)[0] }},
           |
