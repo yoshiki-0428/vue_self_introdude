@@ -35,7 +35,7 @@
               md-button(
                 style="margin-top: 3%"
                 class="md-raised"
-                :to="'/story/'+item.no"
+                @click="onClickShowDetail(item.no)"
               ) Detail
             md-card-media-cover
               md-card-media(
@@ -49,11 +49,17 @@
                 v-if="item.image_url2"
               )
                 img(:src="item.image_url2")
+    story-detail(
+      v-if="isShow"
+      :story="story"
+      :is-show="isShow"
+    )
 </template>
 
 <script>
 import CsvDialog from './CsvDialog'
 import MultiTag from './MultiTag'
+import StoryDetail from './StoryDetail'
 import axios from 'axios'
 
 export default {
@@ -61,16 +67,22 @@ export default {
   data () {
     return {
       stories: [],
-      story: this.stories,
+      story: null,
+      isShow: false,
       url: 'https://script.google.com/macros/s/AKfycbwoDWgY7IDhIKYGsy6afqCM-lhcPvDcVUAaxMrh6p8DSoqTPQ/exec'
     }
   },
   created () {
     this.stories = this.getStoriesByGas()
+    this.$eventHub.$on('update-is-show', this.updateIsShow)
+  },
+  beforeDestroy () {
+    this.$eventHub.$off('update-is-show', this.updateIsShow)
   },
   components: {
     CsvDialog,
-    MultiTag
+    MultiTag,
+    StoryDetail
   },
   methods: {
     getStoriesByGas () {
@@ -78,11 +90,16 @@ export default {
         .get(this.url)
         .then(res => {
           this.stories = res.data.filter(v => v.no !== '').sort((a, b) => a.no < b.no ? 1 : -1)
-          this.story = this.stories[0]
-          console.log(this.story)
         }).catch(err => {
           console.log(err)
         })
+    },
+    onClickShowDetail (no) {
+      this.story = this.stories.filter(v => v.no === no)[0]
+      this.isShow = true
+    },
+    updateIsShow (isShow) {
+      this.isShow = isShow
     }
   }
 }

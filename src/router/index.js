@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Top from '@/components/Top'
 import Story from '@/components/Story'
-import StoryDetail from '@/components/StoryDetail'
 import Post from '@/components/Post'
 import Contact from '@/components/Contact'
 import NotFound from '@/components/NotFound'
@@ -20,12 +19,6 @@ export default new Router({
       path: '/story',
       name: 'story',
       component: Story
-    },
-    {
-      path: '/story/:id',
-      name: 'storyDetail',
-      component: StoryDetail,
-      props: { default: true }
     },
     {
       path: '/post',

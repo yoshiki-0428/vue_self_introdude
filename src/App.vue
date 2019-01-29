@@ -25,6 +25,9 @@ export default {
     text-align: center
     color: #2c3e50
 
+  .english-font
+    font-family: $english
+
   .japanese-font
     font-family: $japanese
 

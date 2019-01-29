@@ -17,6 +17,7 @@ firebase.initializeApp(firebaseConfig).database()
 Vue.use(VueMaterial)
 Vue.use(firebase)
 Vue.config.productionTip = false
+Vue.prototype.$eventHub = new Vue()
 
 /* eslint-disable no-new */
 new Vue({
