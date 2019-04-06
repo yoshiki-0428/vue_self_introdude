@@ -50,6 +50,7 @@ export default {
     'multi-tag': MultiTag
   },
   created () {
+    this.$eventHub.$emit('change-select-tab', 'tab-post')
     this.getGithubRepos()
     this.getQiita()
   },

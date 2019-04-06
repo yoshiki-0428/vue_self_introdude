@@ -103,6 +103,9 @@ export default {
       }
     }
   },
+  created () {
+    this.$eventHub.$emit('change-select-tab', 'tab-contact')
+  },
   methods: {
     getValidationClass (fieldName) {
       const field = this.$v.form[fieldName]

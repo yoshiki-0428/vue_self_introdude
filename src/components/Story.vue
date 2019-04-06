@@ -73,6 +73,7 @@ export default {
   },
   created () {
     this.getStoriesByFirebase()
+    this.$eventHub.$emit('change-select-tab', 'tab-story')
     this.$eventHub.$on('update-is-show', this.updateIsShow)
   },
   beforeDestroy () {
@@ -116,6 +117,10 @@ export default {
   .md-card__list
     padding: 0
 
+    span
+      display: flex
+      flex-wrap: wrap
+
   .md-card
     display: inline-block
     vertical-align: top
@@ -123,9 +128,8 @@ export default {
   @media screen and (min-width: 961px)
     .md-card
       margin: 0 1% 2% 1%
-      width: 25%
-      max-height: 35.0em
-      height: 33em
+      width: 30em
+      height: max-content
 
   @media screen and (max-width: 375px)
     .md-card
@@ -140,10 +144,10 @@ export default {
     padding: 2%
 
   .v-enter-active
-    transition: all .2s ease
+    transition: all .4s ease
 
   .v-leave-active
-    transition: all .2s
+    transition: all .4s
 
   .v-enter, .v-leave-to
     transform: translateX(10px)
