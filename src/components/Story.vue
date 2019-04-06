@@ -10,45 +10,44 @@
           v-for="item in stories"
           :key="item.no"
         )
-          md-card-header
-            md-card-header-text
-              .md-title
-                | {{ item.season_end.split("T")[0] }}
-                | 〜
-                | {{ item.season_start.split("T")[0] }}
-              .md-subhead.japanese-font
-                | {{ item.product_name }}
-              div(style="margin-top: 2%")
-                md-icon(style="margin: 2px") build
-                | Tech
-                md-icon(style="margin: 2px") build
-                multi-tag(
-                  :tags="item.language.split('\\n')"
-                )
-              div(style="margin-top: 2%")
-                md-icon(style="margin: 2px") work
-                | Tools
-                md-icon(style="margin: 2px") work
-                multi-tag(
-                :tags="item.tools.split('\\n')"
-                )
+          .md_card
+            md-card-header
+              md-card-header-text
+                .md-title
+                  | {{ item.season_end.split("T")[0] }}
+                  | 〜
+                  | {{ item.season_start.split("T")[0] }}
+                .md-subhead.japanese-font
+                  | {{ item.product_name }}
+                div(style="margin-top: 2%")
+                  md-icon(style="margin: 2px") build
+                  | Tech
+                  md-icon(style="margin: 2px") build
+                  multi-tag(
+                    :tags="item.language.split('\\n')"
+                  )
+                div(style="margin-top: 2%")
+                  md-icon(style="margin: 2px") work
+                  | Tools
+                  md-icon(style="margin: 2px") work
+                  multi-tag(
+                  :tags="item.tools.split('\\n')"
+                  )
+            .img_space
+              img.imgFix(
+                v-if="item.image_url"
+                :src="item.image_url"
+              )
+              img.imgFix(
+                v-if="item.image_url2"
+                :src="item.image_url2"
+              )
+            .button_space
               md-button(
-                style="margin-top: 3%"
+                style="margin-bottom: 3%"
                 class="md-raised"
                 @click="onClickShowDetail(item.no)"
               ) Detail
-            md-card-media-cover
-              md-card-media(
-                md-big
-                v-if="item.image_url"
-              )
-                img(:src="item.image_url")
-              md-card-media(
-                style="padding-top: 3%"
-                md-big
-                v-if="item.image_url2"
-              )
-                img(:src="item.image_url2")
     story-detail(
       v-if="isShow"
       :story="story"
@@ -60,7 +59,7 @@
 import CsvDialog from './CsvDialog'
 import MultiTag from './MultiTag'
 import StoryDetail from './StoryDetail'
-import axios from 'axios'
+import firebase from 'firebase'
 
 export default {
   name: 'Story',
@@ -73,7 +72,7 @@ export default {
     }
   },
   created () {
-    this.stories = this.getStoriesByGas()
+    this.getStoriesByFirebase()
     this.$eventHub.$on('update-is-show', this.updateIsShow)
   },
   beforeDestroy () {
@@ -85,14 +84,22 @@ export default {
     StoryDetail
   },
   methods: {
-    getStoriesByGas () {
-      axios
-        .get(this.url)
-        .then(res => {
-          this.stories = res.data.filter(v => v.no !== '').sort((a, b) => a.no < b.no ? 1 : -1)
-        }).catch(err => {
-          console.log(err)
-        })
+    // getStoriesByGas () {
+    //   axios
+    //     .get(this.url)
+    //     .then(res => {
+    //       this.stories = res.data.filter(v => v.no !== '').sort((a, b) => a.no < b.no ? 1 : -1)
+    //     }).catch(err => {
+    //       console.log(err)
+    //     })
+    // },
+    getStoriesByFirebase () {
+      const _this = this
+      firebase.database().ref('stories').on('value', function (snapshot) {
+        _this.stories = snapshot.val()
+          .filter(v => v.no !== '')
+          .sort((a, b) => a.no < b.no ? 1 : -1)
+      })
     },
     onClickShowDetail (no) {
       this.story = this.stories.filter(v => v.no === no)[0]
@@ -110,13 +117,27 @@ export default {
     padding: 0
 
   .md-card
-    margin: 0 2% 2% 2%
-    width: 96%
     display: inline-block
     vertical-align: top
 
+  @media screen and (min-width: 961px)
+    .md-card
+      margin: 0 1% 2% 1%
+      width: 25%
+      max-height: 35.0em
+      height: 33em
+
+  @media screen and (max-width: 375px)
+    .md-card
+      margin: 0 4% 2% 4%
+      width: 92%
+
   .flex
     display: flex
+
+  .imgFix
+    width: 30%
+    padding: 2%
 
   .v-enter-active
     transition: all .2s ease
