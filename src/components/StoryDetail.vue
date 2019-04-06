@@ -6,16 +6,16 @@
   )
     md-dialog-title Story Detail
     md-tabs(md-dynamic-height)
-      md-tab(md-label="Base")
+      md-tab(md-label="Overview")
+        p.japanese-font
+          | 名称:
+          | {{ story.product_name }}
         p.japanese-font
           | 時期:
           | {{ story.season_start.split('T')[0] }} 〜 {{ story.season_end.split('T')[0] }}
         p.japanese-font
           | 期間:
           | {{ story.period }}
-        p.japanese-font
-          | 名称:
-          | {{ story.product_name }}
         p.japanese-font
           | 業種:
           | {{ story.industry }}
@@ -28,6 +28,7 @@
         p.japanese-font
           | 役割:
           | {{ story.role }}
+      md-tab(md-label="Detail")
         p.japanese-font(style="line-height: 2")
           | 概要:
           | {{ story.overview }}
@@ -64,4 +65,15 @@ export default {
   .md-dialog
     max-width: 90%
     max-height: 90%
+
+  @media screen and (min-width: 961px)
+    .md-dialog
+      max-width: 90%
+      max-height: 90%
+
+  @media screen and (max-width: 375px)
+    .md-dialog
+      max-width: 90%
+      max-height: 80%
+
 </style>
