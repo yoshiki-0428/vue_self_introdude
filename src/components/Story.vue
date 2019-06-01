@@ -67,8 +67,7 @@ export default {
     return {
       stories: [],
       story: null,
-      isShow: false,
-      url: 'https://script.google.com/macros/s/AKfycbwoDWgY7IDhIKYGsy6afqCM-lhcPvDcVUAaxMrh6p8DSoqTPQ/exec'
+      isShow: false
     }
   },
   created () {
@@ -85,15 +84,6 @@ export default {
     StoryDetail
   },
   methods: {
-    // getStoriesByGas () {
-    //   axios
-    //     .get(this.url)
-    //     .then(res => {
-    //       this.stories = res.data.filter(v => v.no !== '').sort((a, b) => a.no < b.no ? 1 : -1)
-    //     }).catch(err => {
-    //       console.log(err)
-    //     })
-    // },
     getStoriesByFirebase () {
       const _this = this
       firebase.database().ref('stories').on('value', function (snapshot) {
@@ -124,12 +114,13 @@ export default {
   .md-card
     display: inline-block
     vertical-align: top
+    border-radius: 15px
 
   @media screen and (min-width: 961px)
     .md-card
       margin: 0 1% 2% 1%
-      width: 30em
-      height: max-content
+      width: 31%
+      min-height: 30%
 
   @media screen and (max-width: 375px)
     .md-card
