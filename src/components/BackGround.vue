@@ -26,12 +26,12 @@ export default {
     this.initThree()
     this.setThree()
     // === 画面全体のクリックイベントを設定 ===
-    window.onclick = () => {
-      if (this.isCameraMoved) {
-        this.isCameraMoved = false
-        this.zoomCamera()
-      }
-    }
+    // window.onclick = () => {
+    //   if (this.isCameraMoved) {
+    //     this.isCameraMoved = false
+    //     this.zoomCamera()
+    //   }
+    // }
     window.setTimeout(this.moveCube, 5000)
     // === リサイズ対応 ===
     window.addEventListener('resize', this.onResize)
