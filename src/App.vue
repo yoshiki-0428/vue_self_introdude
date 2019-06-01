@@ -19,7 +19,7 @@ export default {
   $japanese: Sawarabi Gothic, serif
 
   #app
-    font-family: $english
+    font-family: $japanese, $english
     -webkit-font-smoothing: antialiased
     -moz-osx-font-smoothing: grayscale
     text-align: center

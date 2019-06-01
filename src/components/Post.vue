@@ -1,35 +1,40 @@
 <template lang="pug">
-  .main_title.main_title__content
-    a(href='https://qiita.com/yoshiki-0428', target='_brank') Qiita
-    |
-    hr
-    |
-    .github_content(v-for='content in qiitaContents', v-bind:key='content.id')
-      md-card.content_card
+  div
+    .main_title.main_title__content(v-if=qiitaContents)
+      | Qiita
+    .md-card__list
+      md-card.content_card(
+        v-for='content in qiitaContents'
+        v-bind:key='content.id'
+      )
         md-card-header-text
-          a.md-title.japanese-font(:href='content.url', target='_brank', style='font-size: 15px') {{ content.title }}
-          p
-            | updated: {{ content.updated_at.split(&quot;T&quot;)[0] }}
-          |
-          p(v-if="content.language")
-            | language: {{ content.language }}
-        |
+          a.md-title.japanese-font(
+            :href='content.url'
+            target='_brank'
+            style='font-size: 15px'
+          ) {{ content.title }}
         md-card-content(v-if='content.tagsArray')
           multi-tag(:tags='content.tagsArray')
-    |
-    .main_title.main_title__content
-      a(href='https://github.com/yoshiki-0428', target='_brank') GitHub
-    |
-    hr
-    |
-    .github_content(v-for='content in githubContents', v-bind:key='content.id')
-      md-card.content_card
+        .like-qiita
+          md-icon thumb_up
+          .like-qiita__count {{ content.likes_count }}
+    .main_title.main_title__content(v-if=githubContents)
+      | GitHub
+    .md-card__list
+      md-card.content_card(
+        v-for='content in githubContents'
+        v-bind:key='content.id'
+      )
         md-card-header-text
           a.md-title(:href='content.html_url', target='_brank') {{ content.name }}
           |
-          p updated: {{ content.updated_at.split(&quot;T&quot;)[0] }},
+          p
+          | Updated:
+          b {{ content.updated_at.split(&quot;T&quot;)[0] }}
           |
-          p(v-if="content.language") language: {{ content.language }}
+          p(v-if="content.language")
+          | Language:
+          b {{ content.language }}
         |
         md-card-content(v-if='content.description')
           span.md-subhead {{ content.description }}
@@ -82,10 +87,46 @@ export default {
 }
 </script>
 
-<style scoped>
-.content_card {
-  margin-right: 5%;
-  margin-left: 5%;
-  margin-bottom: 10px;
-}
+<style scoped lang="sass">
+.md-card-header-text
+  margin: 5px
+
+a.md-title
+  text-decoration: underline
+
+.like-qiita
+  display: flex
+  float: right
+  margin: 10px
+  &__count
+    margin-left: 5px
+
+.content_card
+  margin-right: 5%
+  margin-left: 5%
+  margin-bottom: 10px
+
+.md-card__list
+  padding: 0
+
+span
+  display: flex
+  flex-wrap: wrap
+
+.md-card
+  display: inline-block
+  vertical-align: top
+  border-radius: 10px
+
+@media screen and (min-width: 961px)
+  .md-card
+    margin: 0 1% 2% 1%
+    width: 31%
+    min-height: 150px
+
+@media screen and (max-width: 375px)
+  .md-card
+    margin: 0 4% 2% 4%
+    width: 92%
+
 </style>

@@ -1,6 +1,6 @@
 <template lang="pug">
   .multiTag
-    md-chip(v-for="tag in tags" v-bind:key="tag" md-clickable)
+    md-chip(v-for="tag in tags" v-bind:key="tag")
       | {{ tag }}
 </template>
 
