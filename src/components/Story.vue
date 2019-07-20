@@ -2,6 +2,15 @@
   div
     .main_title.main_title__content
       | My story
+      md-button(
+        alt="Excelファイル形式でダウンロードする"
+        href="https://docs.google.com/spreadsheets/d/1Lq5fGNVhV08ykZ2mWyA0TGvijqfmDRxu_R8ce08V_SE/export?gid=2107304566&amp;format=xlsx&amp;sheetnames=true"
+        style="background: white"
+        class="md-fab md-plain md-fab-bottom-right md-fixed"
+      )
+        .md-icon(
+          class="md-size-2x"
+        ) get_app
     .md-card__list
       transition-group(
         appear
