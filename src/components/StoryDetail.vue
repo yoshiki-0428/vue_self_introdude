@@ -29,7 +29,7 @@
           | 役割:
           | {{ story.role }}
       md-tab(md-label="Detail")
-        p.japanese-font(style="line-height: 2")
+        p.overview.japanese-font(style="line-height: 2")
           | 概要:
           | {{ story.overview }}
     md-dialog-actions
@@ -65,6 +65,9 @@ export default {
   .md-dialog
     max-width: 90%
     max-height: 90%
+
+  p.overview
+    white-space: pre-line
 
   @media screen and (min-width: 961px)
     .md-dialog
