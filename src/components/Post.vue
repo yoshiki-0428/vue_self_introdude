@@ -124,9 +124,14 @@ span
     width: 31%
     min-height: 150px
 
-@media screen and (max-width: 375px)
+@media screen and (max-width: 960px)
   .md-card
-    margin: 0 4% 2% 4%
-    width: 92%
+    margin: 0 2% 2% 2%
+    width: 46%
+
+@media screen and (max-width: 400px)
+  .md-card
+    margin: 0 5% 3% 5%
+    width: 90%
 
 </style>

@@ -13,7 +13,9 @@
         ) get_app
 
     .search_chips
+      md-icon search
       md-chips(
+        md-placeholder="Java, Kotlinなどで検索"
         v-model="searchChips"
         @md-delete="deleteChips"
         @md-insert="insertChips"
@@ -86,7 +88,7 @@ export default {
       stories: [],
       story: null,
       isShow: false,
-      searchChips: ['Java', 'Kotlin']
+      searchChips: []
     }
   },
   created () {
@@ -158,10 +160,22 @@ export default {
       width: 31%
       min-height: 30%
 
-  @media screen and (max-width: 375px)
+  @media screen and (max-width: 960px)
     .md-card
-      margin: 0 4% 2% 4%
-      width: 92%
+      margin: 0 2% 2% 2%
+      width: 46%
+
+  @media screen and (max-width: 400px)
+    .md-card
+      margin: 0 5% 3% 5%
+      width: 90%
+
+  .search_chips
+    display: flex
+    margin-right: 5%
+    margin-left: 5%
+    .md-icon
+      padding-bottom: 5px
 
   .flex
     display: flex
