@@ -119,11 +119,21 @@ export default {
     updateIsShow (isShow) {
       this.isShow = isShow
     },
-    insertChips (chips) {
-      this.stories = this.storiesPrincipal.filter(s => s.language.indexOf(chips) !== -1)
+    insertChips () {
+      this.stories = this.filterChips()
     },
     deleteChips () {
-      this.stories = this.storiesPrincipal
+      this.stories = this.filterChips()
+    },
+    filterChips () {
+      if (this.searchChips.length === 0) return this.storiesPrincipal
+      const _this = this
+      return this.storiesPrincipal.filter(
+        s => _this.searchChips.filter(
+          c => s.language.toLowerCase().indexOf(c.toLowerCase()) !== -1 ||
+          s.tools.toLowerCase().indexOf(c.toLowerCase()) !== -1
+        ).length > 0
+      )
     }
   }
 }
