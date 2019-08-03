@@ -11,6 +11,14 @@
         .md-icon(
           class="md-size-2x"
         ) get_app
+
+    .search_chips
+      md-chips(
+        v-model="searchChips"
+        @md-delete="deleteChips"
+        @md-insert="insertChips"
+      )
+
     .md-card__list
       transition-group(
         appear
@@ -74,9 +82,11 @@ export default {
   name: 'Story',
   data () {
     return {
+      storiesPrincipal: [],
       stories: [],
       story: null,
-      isShow: false
+      isShow: false,
+      searchChips: ['Java', 'Kotlin']
     }
   },
   created () {
@@ -96,6 +106,7 @@ export default {
     getStoriesByFirebase () {
       const _this = this
       firebase.database().ref('stories').on('value', function (snapshot) {
+        _this.storiesPrincipal = snapshot.val()
         _this.stories = snapshot.val()
           .filter(v => v.no !== '')
           .sort((a, b) => a.no < b.no ? 1 : -1)
@@ -107,6 +118,12 @@ export default {
     },
     updateIsShow (isShow) {
       this.isShow = isShow
+    },
+    insertChips (chips) {
+      this.stories = this.storiesPrincipal.filter(s => s.language.indexOf(chips) !== -1)
+    },
+    deleteChips () {
+      this.stories = this.storiesPrincipal
     }
   }
 }
