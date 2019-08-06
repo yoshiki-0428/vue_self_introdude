@@ -9,6 +9,8 @@ jobs:
 
   deploy:
     working_directory: ~/dist
+    docker:
+      - image: circleci/node:10.12.0
     steps:
       - checkout
       - run: apk add --no-cache nodejs npm yarn
