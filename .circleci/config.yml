@@ -1,0 +1,26 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/dist
+    docker:
+      - image: circleci/node:10.16.1
+    steps:
+      - checkout
+
+  deploy:
+    working_directory: ~/dist
+    steps:
+      - checkout
+      - run: apk add --no-cache nodejs npm yarn
+      - run: yarn
+      - run: yarn build
+      - run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN --only hosting
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only: master
