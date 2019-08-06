@@ -10,10 +10,9 @@ jobs:
   deploy:
     working_directory: ~/dist
     docker:
-      - image: circleci/node:10.12.0
+      - image: circleci/node:10.16.1
     steps:
       - checkout
-      - run: apk add --no-cache nodejs npm yarn
       - run: yarn
       - run: yarn build
       - run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN --only hosting
