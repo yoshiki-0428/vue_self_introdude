@@ -2,14 +2,19 @@
   #app
     main-header
     router-view
+    back-ground
 </template>
 
 <script>
 import MainHeader from './components/MainHeader'
+import BackGround from './components/BackGround'
 
 export default {
   name: 'App',
-  components: { MainHeader }
+  components: {
+    MainHeader,
+    BackGround
+  }
 }
 
 </script>

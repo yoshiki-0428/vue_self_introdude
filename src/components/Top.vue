@@ -20,7 +20,6 @@
       // <md-icon class="md-size-2x">keyboard_arrow_down</md-icon>
       // </h1>
     |
-    back-ground
     main-footer
 </template>
 

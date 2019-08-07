@@ -1,6 +1,6 @@
 <template lang="pug">
   .header
-    md-tabs(
+    md-tabs.md-transparent(
       md-alignment='centered'
       :md-active-tab="tabId"
     )
@@ -30,11 +30,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="sass">
 
-.header {
-  top: 0;
-  height: 72px;
-  width: 100%;
-}
+.header
+  top: 0
+  height: 72px
+  width: 100%
 </style>

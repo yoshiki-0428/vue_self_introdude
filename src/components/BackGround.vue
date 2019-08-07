@@ -14,9 +14,7 @@ export default {
       renderer: this.renderer,
       camera: this.camera,
       light: this.light,
-      cube: this.cube,
-      cubeVertical: this.cubeVertical,
-      cubeHorizon: this.cubeHorizon,
+      mergeMesh: this.mergeMesh,
       geometry: this.geometry,
       isCameraMoved: true
     }
@@ -25,14 +23,7 @@ export default {
   created () {
     this.initThree()
     this.setThree()
-    // === 画面全体のクリックイベントを設定 ===
-    // window.onclick = () => {
-    //   if (this.isCameraMoved) {
-    //     this.isCameraMoved = false
-    //     this.zoomCamera()
-    //   }
-    // }
-    window.setTimeout(this.moveCube, 5000)
+    // TODO mousemove イベントの追加
     // === リサイズ対応 ===
     window.addEventListener('resize', this.onResize)
   },
@@ -40,7 +31,6 @@ export default {
   mounted () {
     // === DOMを追加, animate ===
     this.$refs.stage.appendChild(this.renderer.domElement)
-    this.animate()
   },
 
   methods: {
@@ -50,11 +40,11 @@ export default {
 
       // === renderer ===
       this.renderer = new THREE.WebGLRenderer({alpha: true})
-      this.renderer.setSize(window.innerWidth, window.innerHeight - 160)
+      this.renderer.setSize(window.innerWidth, window.innerHeight)
 
       // === camera ===
-      this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / (window.innerHeight - 160), 0.1, 1000)
-      this.camera.position.z = 5
+      this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / (window.innerHeight), 0.1, 1000)
+      this.camera.position.z = 8
 
       // === light ===
       this.light = new THREE.DirectionalLight(0xffffff)
@@ -63,72 +53,36 @@ export default {
       // === model ===
       const cubeSize = 2.5
       this.geometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize)
-      this.material = new THREE.MeshNormalMaterial({color: 0x00ff00})
+      this.material = new THREE.MeshNormalMaterial()
 
-      // === cubes ===
-      this.cube = new THREE.Mesh(this.geometry, this.material)
-      this.cubeVertical = new THREE.Mesh(this.geometry, this.material)
-      this.cubeHorizon = new THREE.Mesh(this.geometry, this.material)
+      // === mesh ===
+      const material = new THREE.MeshStandardMaterial({ color: 0x282828 })
+      // 200個のMeshをランダム配置し、1つのインスタンスとしてまとめる
+      for (let i = 0; i < 200; i++) {
+        const mesh = new THREE.Mesh(new THREE.CubeGeometry(5, 5, 5), material)
+        mesh.position.x = (Math.random() - 0.5) * 200
+        mesh.position.y = (Math.random() - 0.5) * 200
+        mesh.position.z = (Math.random() - 0.5) * 200
+        mesh.rotation.x = Math.random() * 2 * Math.PI
+        mesh.rotation.y = Math.random() * 2 * Math.PI
+        mesh.rotation.z = Math.random() * 2 * Math.PI
+        this.geometry.mergeMesh(mesh)
+      }
+      this.mergeMesh = new THREE.Mesh(this.geometry, material)
+      this.scene.add(this.mergeMesh)
+    },
+    moveMesh (mesh) {
+      requestAnimationFrame(() => this.moveMesh(mesh))
+      // TODO 円運動を行う
+      mesh.position.x += 0.1
+      mesh.position.y += 0.1
+      this.renderer.render(this.scene, this.camera)
     },
     setThree () {
       // === sceneにmodel,light, cameraを追加 ===
       this.scene.add(this.camera)
       this.scene.add(this.light)
-      this.scene.add(this.cube)
-      this.scene.add(this.cubeVertical)
-      this.scene.add(this.cubeHorizon)
-      // === 初期位置の設定 ===
-      this.cube.position.set(0, 0.5, 0)
-      this.cubeVertical.position.set(0, 0.5, 0)
-      this.cubeHorizon.position.set(0, 0.5, 0)
-    },
-    animate () {
-      // 再帰により回転動作を繰り返す
-      requestAnimationFrame(this.animate)
-      this.cube.rotation.z += 0.01
-      this.cubeHorizon.rotation.y += 0.01
-      this.cubeVertical.rotation.x += 0.01
-      /* レンダリングオブジェクトにシーンとカメラを追加してレンダリング開始 */
-      this.renderer.render(this.scene, this.camera)
-    },
-    zoomCamera () {
-      // 再帰によりズーム処理を繰り返す
-      const requestId = requestAnimationFrame(this.zoomCamera)
-      this.camera.position.z -= 0.1
-
-      // カメラの奥行き位置が0になった時点で初期化
-      if (this.camera.position.z < 0) {
-        this.isCameraMoved = true
-        this.camera.position.z = 5
-        cancelAnimationFrame(requestId)
-      }
-      this.renderer.render(this.scene, this.camera)
-    },
-    moveCube () {
-      // 再帰により移動処理を繰り返す
-      const requestId = requestAnimationFrame(this.moveCube)
-      this.cubeHorizon.position.x += 0.01
-      this.cubeVertical.position.x -= 0.01
-
-      // それぞれのキューブ位置が端に行った時点で処理終了
-      if (this.cubeHorizon.position.x > 5 && this.cubeVertical.position.x < -5) {
-        cancelAnimationFrame(requestId)
-        this.moveCube2()
-      }
-      this.renderer.render(this.scene, this.camera)
-    },
-    moveCube2 () {
-      // 再帰により移動処理を繰り返す
-      const requestId = requestAnimationFrame(this.moveCube2)
-      this.cubeHorizon.position.x -= 0.01
-      this.cubeVertical.position.x += 0.01
-
-      // それぞれのキューブ位置が端に行った時点で処理終了
-      if (this.cubeHorizon.position.x < -5 && this.cubeVertical.position.x > 5) {
-        cancelAnimationFrame(requestId)
-        this.moveCube()
-      }
-      this.renderer.render(this.scene, this.camera)
+      this.moveMesh(this.mergeMesh)
     },
     onResize () {
       // サイズを取得
@@ -146,8 +100,11 @@ export default {
 }
 </script>
 
-<style scoped>
-  .stage {
-    z-index: -1;
-  }
+<style scoped lang="sass">
+  .stage
+    z-index: -1
+    position: fixed
+    top: 0
+    left: 0
+
 </style>
