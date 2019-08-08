@@ -16,7 +16,8 @@ export default {
       light: this.light,
       mergeMesh: this.mergeMesh,
       geometry: this.geometry,
-      isCameraMoved: true
+      isCameraMoved: true,
+      moveSpeed: 0.001
     }
   },
 
@@ -24,7 +25,7 @@ export default {
     this.initThree()
     this.setThree()
     this.moveMesh(this.mergeMesh)
-
+    window.addEventListener('click', this.moveSpeedUp)
     // TODO mousemove イベントの追加
     // === リサイズ対応 ===
     window.addEventListener('resize', this.onResize)
@@ -76,9 +77,17 @@ export default {
     },
     moveMesh (mesh) {
       requestAnimationFrame(() => this.moveMesh(mesh))
-      mesh.rotation.x += 0.001
-      mesh.rotation.y += 0.001
+      mesh.rotation.x += this.moveSpeed
+      mesh.rotation.y += this.moveSpeed
       this.renderer.render(this.scene, this.camera)
+    },
+    moveSpeedUp () {
+      const timeId = setTimeout(this.moveSpeedUp, 1)
+      if (this.moveSpeed >= 1) {
+        this.moveSpeed = 0.001
+        clearTimeout(timeId)
+      }
+      this.moveSpeed += 0.01
     },
     setThree () {
       // === sceneにmodel,light, cameraを追加 ===
