@@ -23,7 +23,7 @@ export default {
   created () {
     this.initThree()
     this.setThree()
-    this.moveMesh(this.mergeMesh, 0)
+    this.moveMesh(this.mergeMesh)
 
     // TODO mousemove イベントの追加
     // === リサイズ対応 ===
@@ -74,11 +74,10 @@ export default {
     getRotation () {
       return Math.random() * 2 * Math.PI
     },
-    moveMesh (mesh, deg) {
-      requestAnimationFrame(() => this.moveMesh(mesh, deg))
-      mesh.position.x += Math.cos(deg * (Math.PI / 180))
-      mesh.position.z += Math.sin(deg * (Math.PI / 180))
-      deg += 1
+    moveMesh (mesh) {
+      requestAnimationFrame(() => this.moveMesh(mesh))
+      mesh.rotation.x += 0.001
+      mesh.rotation.y += 0.001
       this.renderer.render(this.scene, this.camera)
     },
     setThree () {
