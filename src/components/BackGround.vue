@@ -23,6 +23,8 @@ export default {
   created () {
     this.initThree()
     this.setThree()
+    this.moveMesh(this.mergeMesh, 0)
+
     // TODO mousemove イベントの追加
     // === リサイズ対応 ===
     window.addEventListener('resize', this.onResize)
@@ -43,8 +45,9 @@ export default {
       this.renderer.setSize(window.innerWidth, window.innerHeight)
 
       // === camera ===
-      this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / (window.innerHeight), 0.1, 1000)
-      this.camera.position.z = 8
+      this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / (window.innerHeight), 1, 1000)
+      this.camera.position.set(0, 0, 15)
+      this.camera.lookAt(new THREE.Vector3(0, 0, 0))
 
       // === light ===
       this.light = new THREE.DirectionalLight(0xffffff)
@@ -56,33 +59,33 @@ export default {
       this.material = new THREE.MeshNormalMaterial()
 
       // === mesh ===
-      const material = new THREE.MeshStandardMaterial({ color: 0x282828 })
       // 200個のMeshをランダム配置し、1つのインスタンスとしてまとめる
       for (let i = 0; i < 200; i++) {
-        const mesh = new THREE.Mesh(new THREE.CubeGeometry(5, 5, 5), material)
-        mesh.position.x = (Math.random() - 0.5) * 200
-        mesh.position.y = (Math.random() - 0.5) * 200
-        mesh.position.z = (Math.random() - 0.5) * 200
-        mesh.rotation.x = Math.random() * 2 * Math.PI
-        mesh.rotation.y = Math.random() * 2 * Math.PI
-        mesh.rotation.z = Math.random() * 2 * Math.PI
+        const mesh = new THREE.Mesh(new THREE.CubeGeometry(5, 5, 5), this.material)
+        mesh.position.set(this.getPosition(), this.getPosition(), this.getPosition())
+        mesh.rotation.set(this.getRotation(), this.getRotation(), this.getRotation())
         this.geometry.mergeMesh(mesh)
       }
-      this.mergeMesh = new THREE.Mesh(this.geometry, material)
-      this.scene.add(this.mergeMesh)
+      this.mergeMesh = new THREE.Mesh(this.geometry, this.material)
     },
-    moveMesh (mesh) {
-      requestAnimationFrame(() => this.moveMesh(mesh))
-      // TODO 円運動を行う
-      mesh.position.x += 0.1
-      mesh.position.y += 0.1
+    getPosition () {
+      return (Math.random() - 0.5) * 200
+    },
+    getRotation () {
+      return Math.random() * 2 * Math.PI
+    },
+    moveMesh (mesh, deg) {
+      requestAnimationFrame(() => this.moveMesh(mesh, deg))
+      mesh.position.x += Math.cos(deg * (Math.PI / 180))
+      mesh.position.z += Math.sin(deg * (Math.PI / 180))
+      deg += 1
       this.renderer.render(this.scene, this.camera)
     },
     setThree () {
       // === sceneにmodel,light, cameraを追加 ===
       this.scene.add(this.camera)
       this.scene.add(this.light)
-      this.moveMesh(this.mergeMesh)
+      this.scene.add(this.mergeMesh)
     },
     onResize () {
       // サイズを取得
