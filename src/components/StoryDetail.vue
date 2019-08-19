@@ -78,5 +78,6 @@ export default {
     .md-dialog
       max-width: 90%
       max-height: 80%
+      overflow: scroll
 
 </style>
