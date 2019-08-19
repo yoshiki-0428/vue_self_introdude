@@ -24,24 +24,21 @@ export default {
 }
 </script>
 
-<style scoped>
-  .footer{
-    position: fixed;
-    bottom: 0;
-    height: 88px;
-    width: 100%;
-    padding-bottom: 7%;
-  }
+<style scoped lang="sass">
+  .footer
+    position: fixed
+    bottom: 0
+    height: 120px
+    width: 100%
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-  a {
-    color: #42b983;
-  }
+  ul
+    list-style-type: none
+    padding: 0
+
+  li
+    display: inline-block
+    margin: 0 10px
+
+  a
+    color: #42b983
 </style>
