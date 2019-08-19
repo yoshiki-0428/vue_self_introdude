@@ -11,6 +11,10 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path: '/',
+      component: Top
+    },
+    {
       path: '/top',
       name: 'top',
       component: Top
