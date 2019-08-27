@@ -4,7 +4,7 @@
       ul
         li
           md-icon public
-          a(href='https://twitter.com/yoshiki_pg0428', target='_blank')
+          a(href='https://twitter.com/yoshiki__0428', target='_blank')
             | Twitter
         |
         li
