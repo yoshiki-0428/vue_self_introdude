@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueAnalytics from 'vue-analytics'
 
 // デザイン
 import VueMaterial from 'vue-material'
@@ -16,6 +17,10 @@ firebase.initializeApp(firebaseConfig).database()
 
 Vue.use(VueMaterial)
 Vue.use(firebase)
+Vue.use(VueAnalytics, {
+  id: 'UA-146707736-1',
+  router
+})
 Vue.config.productionTip = false
 Vue.prototype.$eventHub = new Vue()
 

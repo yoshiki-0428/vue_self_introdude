@@ -10,7 +10,7 @@ jobs:
   deploy:
     working_directory: ~/dist
     docker:
-      - image: circleci/node:10.16.1
+      - image: circleci/node:10.16.3
     steps:
       - checkout
       - run: yarn
